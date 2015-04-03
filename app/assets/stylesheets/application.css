@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: "proxima-nova", sans-serif;
+}
+
+paper-autogrow-textarea textarea {
+  width: 100%;
+  max-width: 35em;
+}

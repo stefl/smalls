@@ -1,0 +1,20 @@
+{
+  "name": "smalls",
+  "version": "0.0.1",
+  "homepage": "https://github.com/stefl/smalls",
+  "authors": [
+    "Stef Lewandowski <stef@stef.io>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": [
+    "d-calendar"
+  ]
+}

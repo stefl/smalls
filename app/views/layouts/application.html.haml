@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title The Smalls
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    <script src="//use.typekit.net/jqs3rqw.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+    = html_import_tag "application"
+
+  %body{:unresolved=>true}
+
+    = yield
+

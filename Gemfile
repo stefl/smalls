@@ -44,3 +44,8 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
+
+gem 'polymer-rails'
+gem 'polymer-core-rails'
+gem 'polymer-paper-rails'
+gem 'friendly_id'

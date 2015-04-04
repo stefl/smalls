@@ -1,20 +1,21 @@
-.smalls-branding
-  %a{:href=>"/", :"data-no-turbolink" => "true"}
-    %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
+.main
+  .smalls-branding
+    %a{:href=>"/", :"data-no-turbolink" => "true"}
+      %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
 
-= render partial: "briefs/display"
+  = render partial: "briefs/display"
 
-%polymer-element{name: "brief-show"}
-  %template
-    %brief-display{brief: "{{brief}}"}
+  %polymer-element{name: "brief-show"}
+    %template
+      %brief-display{brief: "{{brief}}"}
 
-  :javascript
-    Polymer('brief-show', {
+    :javascript
+      Polymer('brief-show', {
 
-      ready: function() {
-        this.brief = #{@brief.to_json};
-      }
+        ready: function() {
+          this.brief = #{@brief.to_json};
+        }
 
-    });
+      });
 
-%brief-show
+  %brief-show

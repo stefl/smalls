@@ -1,10 +1,33 @@
 
 %polymer-element{name: "brief-display", :attributes=>"brief"}
+  
+
   %template
+    :scss
+      .brief-body {
+        section {
+          border-bottom: 2px solid #ddd;
+        }
+      }
     .brief
 
       .brief-header
         %h1 {{brief.name}}
+        %template{:if=>"{{brief.brand_name}}"}
+          %h2
+            For {{brief.brand_name}}
+        %template{:if=>"{{brief.pitch_deadline}}"}
+          %h4
+            %core-icon{icon:"event"}
+            Applications close
+            %time{is:"local-time", datetime:"{{brief.pitch_deadline}}"} {{brief.pitch_deadline | dayDisplay}}
+        %template{:if=>"{{brief.delivery_deadline}}"}
+          %h4
+            %core-icon{icon:"event"}
+            Final delivery
+            %time{is:"local-time", datetime:"{{brief.delivery_deadline}}"} {{brief.delivery_deadline | dayDisplay}}
+            
+
       .brief-inner
         .brief-body
           %section
@@ -16,8 +39,17 @@
               %mark-down{:text=>"{{brief.budget_description}}"}
 
           %section
-            %h3 Practical details
+            %h3 Creative
+            %template{:if=>"{{brief.aesthetic}}"}
+              %mark-down{:text=>"{{brief.aesthetic}}"}
 
+          %section
+            %h3 Objectives
+            %template{:if=>"{{brief.aesthetic}}"}
+              %mark-down{:text=>"{{brief.aesthetic}}"}
+
+          %section
+            %h3 Practical details
             %template{:if=>"{{brief.destination}}"}
               %h4 Where the video will be used
               %mark-down{:text=>"{{brief.destination}}"}
@@ -26,11 +58,24 @@
               %h4 Technical specification
               %mark-down{:text=>"{{brief.technical_specification}}"}
 
+          - if false
+            %core-item{icon:"label-outline", label:"Start"}
+            %core-item{icon:"label-outline", label:"Overview"}
+            %core-item{icon:"label-outline", label:"Creative"}
+            %core-item{icon:"label-outline", label:"Objectives"}
+            %core-item{icon:"label-outline", label:"Timings"}
+            %core-item{icon:"label-outline", label:"Practicalities"}
+            %core-item{icon:"label-outline", label:"Team"}
+            %core-item{icon:"label-outline", label:"Preview"}
 
   :javascript
     Polymer('brief-display', {
 
       ready: function() {
+
+      },
+      dayDisplay: function(date) {
+        return(date.toDateString());
       }
 
     });

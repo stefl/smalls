@@ -1,8 +1,8 @@
-- @body_styles = "full"
+- @body_styles = "full fullbleed layout vertical"
 
 = render partial: "briefs/display"
 
-%polymer-element{name: "brief-maker"}
+%polymer-element{name: "brief-maker", :flex=>""}
   
   %template
     :scss
@@ -24,6 +24,10 @@
       .next {
         margin-top: 4rem;
         margin-bottom: 2rem;
+      }
+
+      .next-right {
+        float: right;
       }
 
       paper-fab.arrow-forward {
@@ -53,20 +57,54 @@
         padding-top: 2rem;
         padding-bottom: 2rem;
       }
+
+      .main-drawer {
+        background-color: #ffee55;
+        .smalls-branding {
+          margin: auto;
+          margin-top: 2rem;
+          text-align: center;
+        }
+      }
+
+      .main-panel {
+        padding-top: 2rem;
+        //min-height: 5000px;
+        
+      }
+
       
       
-    = form_for @brief, :html => {:as => "ajax-form"} do |f|
-      %div.main
+
+      
+  
+    
+
+    %core-drawer-panel
+      %core-header-panel.main-drawer{drawer:""}
         .smalls-branding
           %a{:href=>"/", :"data-no-turbolink" => "true"}
             %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
-        
-        %div.main-content
+        %core-menu{selected:"{{page}}"}
+          %core-item{icon:"label-outline", label:"Start"}
+          %core-item{icon:"label-outline", label:"Overview"}
+          %core-item{icon:"label-outline", label:"Creative"}
+          %core-item{icon:"label-outline", label:"Objectives"}
+          %core-item{icon:"label-outline", label:"Timings"}
+          %core-item{icon:"label-outline", label:"Practicalities"}
+          %core-item{icon:"label-outline", label:"Team"}
+          %core-item{icon:"label-outline", label:"Preview"}
+        = render partial: "briefs/nav"
+  
+      %core-header-panel.main-panel{main:""}
+        %button{:"core-drawer-toggle"=>"", toggle: "", drawer: ""}
+        = form_for @brief, :html => {:as => "ajax-form"} do |f|  
+
           %core-animated-pages.cards{:selected=>"{{page}}", :transitions=>"hero-transition cross-fade", :"on-core-animated-pages-transition-end"=>"{{complete}}"}              
 
             %section
               %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-                %h1 Let’s commision a video, shall we?
+                %h1 Let’s commission a video, shall we?
               %div.page{:"cross-fade"=>""}
                 .intro
                   
@@ -96,15 +134,15 @@
                 .narrow
                   %paper-input-decorator{:label => "What is the name of this project?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea
-                      %textarea{:name=>"brief[name]"}  {{brief.name}}                   
+                      %textarea{:name=>"brief[name]", :value => "{{brief.name}}"}
 
                   %paper-input-decorator{:label => "What is the name of the brand, product or service the video will promote?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea
-                      %textarea{:name=>"brief[brand_name]"} {{brief.brand_name}}
+                      %textarea{:name=>"brief[brand_name]", :value => "{{brief.brand_name}}"}
 
                   %paper-input-decorator{:label => "How would you describe this project?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea
-                      %textarea{:name=>"brief[description]"} {{brief.description}}
+                      %textarea{:name=>"brief[description]", :value => "{{brief.description}}"}
 
                   
                 = render partial: "briefs/next" 
@@ -119,7 +157,7 @@
                 .narrow
                   %paper-input-decorator{:label => "What is the style and general aesthetic you’re looking for?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea
-                      %textarea{:name=>"brief[aesthetic]"} {{brief.aesthetic}}
+                      %textarea{:name=>"brief[aesthetic]", :value => "{{brief.aesthetic}}"}
                 = render partial: "briefs/next"  
             %section
               %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
@@ -132,15 +170,15 @@
                 .narrow
                   %paper-input-decorator{:label => "Why are you commissioning this video?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea
-                      %textarea{:name => "brief[why_commissioning]"} {{brief.why_commissioning}}
+                      %textarea{:name => "brief[why_commissioning]", :value => "{{brief.why_commissioning}}"}
 
                   %paper-input-decorator{:label => "What is your challenge or business objective?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea
-                      %textarea{:name=>"brief[objectives]"} {{brief.objectives}}
+                      %textarea{:name=>"brief[objectives]", :value => "{{brief.objectives}}"}
                     
                   %paper-input-decorator{:label => "What will success look like?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea
-                      %textarea{:name=>"brief[success_criteria]"} {{brief.success_criteria}}
+                      %textarea{:name=>"brief[success_criteria]", :value => "{{brief.success_criteria}}"}
 
                 = render partial: "briefs/next"
             
@@ -153,13 +191,13 @@
                     %h2{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
                       What is the pitch deadline?
                     %div{:"cross-fade"=>"", :layout=>"", :horizontal=>"", :center=>"", :"center-justified"=>"", :class=>"light-theme" }
-                      %d-calendar{:selectedDate=>"{{brief.pitch_deadline}}", :date=>"{{brief.pitch_deadline}}"}
+                      %d-calendar{:date=>"{{brief.pitch_deadline}}"}
                       %input{:type=>"hidden", :name=>"brief[pitch_deadline]", :value=>"{{brief.pitch_deadline}}"}
                   %div{:flex=>""}
                     %h2{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
                       And the delivery deadline?
                     %div{:"cross-fade"=>"", :layout=>"", :horizontal=>"", :center=>"", :"center-justified"=>"", :class=>"light-theme" }
-                      %d-calendar{:selectedDate=>"{{brief.delivery_deadline}}", :date=>"{{brief.delivery_deadline}}"}
+                      %d-calendar{:date=>"{{brief.delivery_deadline}}"}
                       %input{:type=>"hidden", :name=>"brief[delivery_deadline]", :value=>"{{brief.delivery_deadline}}"}
                 = render partial: "briefs/next"
 
@@ -171,14 +209,14 @@
 
                 .narrow
                   %paper-input-decorator{:label => "What is your budget?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %input{:is=>"core-input", :name => "brief[budget_description]", :value => "brief.budget_description"}
+                    %input{:is=>"core-input", :name => "brief[budget_description]", :value => "{{brief.budget_description}}"}
 
                   %paper-input-decorator{:label => "Where will the video be used?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %input{:is=>"core-input", :name => "brief[destination]", :value=>"brief.destination"}
+                    %input{:is=>"core-input", :name => "brief[destination]", :value=>"{{brief.destination}}"}
 
                   %paper-input-decorator{:label => "Do you have a technical specification?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea
-                      %textarea{:name=>"brief[technical_specification"} {{brief.technical_specification}}
+                      %textarea{:name=>"brief[technical_specification", :value=> "{{brief.technical_specification}}"}
                 = render partial: "briefs/next"
 
             %section
@@ -189,20 +227,20 @@
 
                 .narrow
                   %paper-input-decorator{:label => "What's the name of your company?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %input{:is=>"core-input"}
+                    %input{:is=>"core-input", :name => "brief[company_name]", :value => "{{brief.company_name}}"}
                   %paper-input-decorator{:label => "If you're working for another brand, what is it?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %input{:is=>"core-input"}
+                    %input{:is=>"core-input", :name => "brief[brand_name]", :value => "{{brief.brand_name}}"}
                   %paper-input-decorator{:label => "Who is in charge of the project?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %input{:is=>"core-input"}
+                    %input{:is=>"core-input", :name => "brief[brand_name]", :value => "{{brief.brand_name}}"}
 
                   %paper-input-decorator{:label => "What's their email?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %input{:is=>"core-input"}
+                    %input{:is=>"core-input", :name => "brief[email]", :value => "{{brief.email}}"}
 
                   %paper-input-decorator{:label => "Phone number?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %input{:is=>"core-input"}
+                    %input{:is=>"core-input", :name => "brief[telephone]", :value => "{{brief.telephone}}"}
 
                   %paper-input-decorator{:label => "Twitter handle?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %input{:is=>"core-input"}
+                    %input{:is=>"core-input", :name => "brief[twitter_handle]", :value => "{{brief.twitter_handle}}"}
                 = render partial: "briefs/next"
 
             %section
@@ -222,7 +260,7 @@
   :javascript
     Polymer('brief-maker', {
 
-      page: 7,
+      page: 0,
 
       forward: function(){
         this.page = this.page +1;

@@ -28,7 +28,12 @@ body {
     width: 100%;
     max-width: 36em;
   }
+  /deep/ #mainPanel #dropShadow {
+    display :none
+  }
 }
+
+
 
 body /deep/ .smalls-branding {
   margin: 0.5rem;

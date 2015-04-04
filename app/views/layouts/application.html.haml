@@ -10,7 +10,7 @@
     <script>try{Typekit.load();}catch(e){}</script>
     = html_import_tag "application"
 
-  %body{:unresolved=>true}
+  %body{:unresolved=>true, :class=>@body_styles}
 
     = yield
 

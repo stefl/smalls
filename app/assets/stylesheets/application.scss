@@ -16,9 +16,24 @@
 
 body {
   font-family: "proxima-nova", sans-serif;
+  &.full {
+    margin: 0px;
+    padding: 0px;
+    background-color: #f1f1f1;
+    width: 100%;
+    height: 100%;
+
+  }
+  /deep/ textarea {
+    width: 100%;
+    max-width: 36em;
+  }
 }
 
-paper-autogrow-textarea textarea {
-  width: 100%;
-  max-width: 35em;
+body /deep/ .smalls-branding {
+  margin: 0.5rem;
+  opacity: 0.333;
+  &:hover {
+    opacity: 1;
+  }
 }

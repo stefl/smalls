@@ -1,14 +1,17 @@
-%img{:src=>asset_path("smalls-logo.svg"), :width => 100}
+- @body_styles = "full"
+
+= render partial: "briefs/display"
+
 %polymer-element{name: "brief-maker"}
   
   %template
-    :css
+    :scss
       .intro {
-        max-width: 35em;
+        max-width: 36em;
         margin: auto;
       }
       .narrow {
-        max-width: 35em;
+        max-width: 36em;
         margin: auto;
       }
       .main {
@@ -18,135 +21,208 @@
         
       }
 
+      .next {
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+      }
+
       paper-fab.arrow-forward {
         background: #259b24;
         vertical-align: middle;
         margin-left: 2rem;
+        margin-right: 2rem;
       }
 
       paper-fab.arrow-back {
         background: #777777;
         vertical-align: middle;
+        margin-left: 2rem;
         margin-right: 2rem;
       }
 
       .progress-bar {
         margin-bottom: 1rem;
       }
-    %div.main{:layout=>"", :vertical=>""}
+
       
-      %div.main-content{:flex => ""}
-        %core-animated-pages{:selected=>"{{page}}", :transitions=>"hero-transition cross-fade", :"on-core-animated-pages-transition-end"=>"{{complete}}"}
-          
-          %section
-            %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-              %h1 Let’s commision a video, shall we?
-            %div{:"cross-fade"=>""}
-              .intro
-                %p 
-                  Think about what you’re looking for in your video project. This tool will help you through the process of building a brief.
+      .cards .page{
+        border: 1px solid #ddd;
+        background-color: #fff;
+        max-width: 40em;
+        margin: auto;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+      
+      
+    = form_for @brief, :html => {:as => "ajax-form"} do |f|
+      %div.main
+        .smalls-branding
+          %a{:href=>"/", :"data-no-turbolink" => "true"}
+            %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
+        
+        %div.main-content
+          %core-animated-pages.cards{:selected=>"{{page}}", :transitions=>"hero-transition cross-fade", :"on-core-animated-pages-transition-end"=>"{{complete}}"}              
 
-                %p
-                  Once it’s done, you’ll submit it to our network of 10,000+ short film makers, get responses and shortlist to find just the right people to make it for you.
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Let’s commision a video, shall we?
+              %div.page{:"cross-fade"=>""}
+                .intro
+                  
+                  %p
+                    %strong
+                      The Smalls
+                    is a network of talented film makers who make award-winning short form video content. Viral, music, vine, advertorial, all kinds of video.
 
-              
-
-          %section
-            %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-              %h1 An overview of your project
-            %div{:"cross-fade"=>""}
-              .intro
-                %p
-                  Imagine you are talking to a film-maker one-on-one. This section is a chance to get them interested in your project and to understand what it’s about.
-
-              .narrow
-                %paper-input-decorator{:label => "What is it called?", :floatingLabel => "", :layout => "", :vertical => ""}
-                  %paper-autogrow-textarea
-                    %textarea
-
-                %paper-input-decorator{:label => "Describe what you are looking for", :floatingLabel => "", :layout => "", :vertical => ""}
-                  %paper-autogrow-textarea
-                    %textarea
-
-                %paper-input-decorator{:label => "Why are you commissioning this video?", :floatingLabel => "", :layout => "", :vertical => ""}
-                  %paper-autogrow-textarea
-                    %textarea
-               
-          %section
-            %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-              %h1 Creative brief
-            %div{:"cross-fade"=>""}
-              .intro
-                %p
-                  Now think about what you’d like to achieve creatively with this project.
-
-              .narrow
-                %paper-input-decorator{:label => "What is the style and general aesthetic you’re looking for?", :floatingLabel => "", :layout => "", :vertical => ""}
-                  %paper-autogrow-textarea
-                    %textarea
-              
-          %section
-            %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-              %h1 Your objectives
-            %div{:"cross-fade"=>""}
-              .intro
-                %p
-                  Now think about what you’re hoping to achieve by making this video.
-
-              .narrow
-                %paper-input-decorator{:label => "What will success look like?", :floatingLabel => "", :layout => "", :vertical => ""}
-                  %paper-autogrow-textarea
-                    %textarea
-
-                %paper-input-decorator{:label => "What is your challenge or business objective?", :floatingLabel => "", :layout => "", :vertical => ""}
-                  %paper-autogrow-textarea
-                    %textarea
+                  %p
+                    We’ve made this tool to help you find the right person to make yours.
+                  
+                  %p 
+                    Take a moment to think about what you’re trying to achieve with your project.
+                  %p
+                    Got it? Let's begin…
+                = render partial: "briefs/next"
                 
-          
-          %section
-            %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-              %h1 Timings
-            %div{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-              %div{:flex=>""}
-                %h2{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-                  What is the pitch deadline?
-                %div{:"cross-fade"=>"", :layout=>"", :horizontal=>"", :center=>"", :"center-justified"=>"", :class=>"light-theme" }
-                  %d-calendar
-              %div{:flex=>""}
-                %h2{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-                  And the delivery deadline?
-                %div{:"cross-fade"=>"", :layout=>"", :horizontal=>"", :center=>"", :"center-justified"=>"", :class=>"light-theme" }
-                  %d-calendar
+
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 An overview of your project
+              .page{:"cross-fade"=>""}
+                .intro
+                  %p
+                    Imagine you are talking to a film-maker one-on-one. What would you say to capture their interest in your project?
+
+                .narrow
+                  %paper-input-decorator{:label => "What is the name of this project?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"brief[name]"}  {{brief.name}}                   
+
+                  %paper-input-decorator{:label => "What is the name of the brand, product or service the video will promote?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"brief[brand_name]"} {{brief.brand_name}}
+
+                  %paper-input-decorator{:label => "How would you describe this project?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"brief[description]"} {{brief.description}}
+
+                  
+                = render partial: "briefs/next" 
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Creative brief
+              .page{:"cross-fade"=>""}
+                .intro
+                  %p
+                    Now think about what you’d like to achieve creatively with this project.
+
+                .narrow
+                  %paper-input-decorator{:label => "What is the style and general aesthetic you’re looking for?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"brief[aesthetic]"} {{brief.aesthetic}}
+                = render partial: "briefs/next"  
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Your objectives
+              .page{:"cross-fade"=>""}
+                .intro
+                  %p
+                    Now think about what you’re hoping to achieve by making this video.
+    
+                .narrow
+                  %paper-input-decorator{:label => "Why are you commissioning this video?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name => "brief[why_commissioning]"} {{brief.why_commissioning}}
+
+                  %paper-input-decorator{:label => "What is your challenge or business objective?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"brief[objectives]"} {{brief.objectives}}
+                    
+                  %paper-input-decorator{:label => "What will success look like?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"brief[success_criteria]"} {{brief.success_criteria}}
+
+                = render partial: "briefs/next"
             
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Timings
+              .page{:"cross-fade"=>""}
+                %div{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                  %div{:flex=>""}
+                    %h2{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                      What is the pitch deadline?
+                    %div{:"cross-fade"=>"", :layout=>"", :horizontal=>"", :center=>"", :"center-justified"=>"", :class=>"light-theme" }
+                      %d-calendar{:selectedDate=>"{{brief.pitch_deadline}}", :date=>"{{brief.pitch_deadline}}"}
+                      %input{:type=>"hidden", :name=>"brief[pitch_deadline]", :value=>"{{brief.pitch_deadline}}"}
+                  %div{:flex=>""}
+                    %h2{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                      And the delivery deadline?
+                    %div{:"cross-fade"=>"", :layout=>"", :horizontal=>"", :center=>"", :"center-justified"=>"", :class=>"light-theme" }
+                      %d-calendar{:selectedDate=>"{{brief.delivery_deadline}}", :date=>"{{brief.delivery_deadline}}"}
+                      %input{:type=>"hidden", :name=>"brief[delivery_deadline]", :value=>"{{brief.delivery_deadline}}"}
+                = render partial: "briefs/next"
 
-          %section
-            %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-              %h1 Practicalities
-            %div{:"cross-fade"=>""}
-              .intro
-                %p
-                  And finally, just a few details.
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Practical details
+              .page{:"cross-fade"=>""}
+                .intro
 
-              .narrow
-                %paper-input-decorator{:label => "Where will the video be used?", :floatingLabel => "", :layout => "", :vertical => ""}
-                  %input{:is=>"core-input"}
+                .narrow
+                  %paper-input-decorator{:label => "What is your budget?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %input{:is=>"core-input", :name => "brief[budget_description]", :value => "brief.budget_description"}
 
-                %paper-input-decorator{:label => "Where will the video be used?", :floatingLabel => "", :layout => "", :vertical => ""}
-                  %input{:is=>"core-input"}
-      %div.next
-        %div.progress{:center=>"", :layout=>"", :vertical=>"", :"center-justified"=>""}
-          .progress-bar
-            %paper-progress{:value=>"{{(page * 100) / 7}}"}
-          .back-forward
-            %paper-fab{:class=>"arrow-back", :mini=>"", :icon=>"arrow-back", :title=>"arrow-back", :role=>"button", :tabindex=>"1", :"aria-label"=>"arrow-back", :"on-click"=>"{{back}}"}
-            %paper-fab{:class=>"arrow-forward", :icon=>"arrow-forward", :title=>"arrow-forward", :role=>"button", :tabindex=>"0", :"aria-label"=>"arrow-forward", :"on-click"=>"{{forward}}"}
-            
+                  %paper-input-decorator{:label => "Where will the video be used?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %input{:is=>"core-input", :name => "brief[destination]", :value=>"brief.destination"}
 
+                  %paper-input-decorator{:label => "Do you have a technical specification?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"brief[technical_specification"} {{brief.technical_specification}}
+                = render partial: "briefs/next"
+
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Finally, a little about you and the team
+              %div.page{:"cross-fade"=>""}
+                .intro
+
+                .narrow
+                  %paper-input-decorator{:label => "What's the name of your company?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %input{:is=>"core-input"}
+                  %paper-input-decorator{:label => "If you're working for another brand, what is it?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %input{:is=>"core-input"}
+                  %paper-input-decorator{:label => "Who is in charge of the project?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %input{:is=>"core-input"}
+
+                  %paper-input-decorator{:label => "What's their email?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %input{:is=>"core-input"}
+
+                  %paper-input-decorator{:label => "Phone number?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %input{:is=>"core-input"}
+
+                  %paper-input-decorator{:label => "Twitter handle?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %input{:is=>"core-input"}
+                = render partial: "briefs/next"
+
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Preview your brief
+              %div.page{:"cross-fade"=>""}
+                .intro
+                  %p
+                    This is how your brief will appear to a film maker, so take a look and see if you need to make any changes.   
+                  %p
+                    %button{:type => "submit"} Publish this brief 
+                = render partial: "briefs/next" 
+
+              %div.preview{:"cross-fade"=>""}
+                %brief-display{:brief => "{{brief}}"}
 
   :javascript
     Polymer('brief-maker', {
 
-      page: 0,
+      page: 7,
 
       forward: function(){
         this.page = this.page +1;
@@ -154,6 +230,12 @@
 
       back: function(){
         this.page = this.page -1;
+      },
+
+      numberOfPages: 8,
+
+      ready: function() {
+        this.brief = #{@brief.to_json};
       }
 
     });

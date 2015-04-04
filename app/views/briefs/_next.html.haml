@@ -1,0 +1,7 @@
+%div.next
+  %div.progress{:center=>"", :layout=>"", :vertical=>"", :"center-justified"=>""}
+    .progress-bar
+      %paper-progress{:value=>"{{(page * 100) / (numberOfPages-1)}}"}
+    .back-forward
+      %paper-fab{:"hidden?"=>"{{page == 0}}", :class=>"arrow-back", :mini=>"", :icon=>"arrow-back", :title=>"arrow-back", :role=>"button", :tabindex=>"1", :"aria-label"=>"arrow-back", :"on-click"=>"{{back}}"}
+      %paper-fab{:"hidden?"=>"{{page == (numberOfPages -1)}}", :class=>"arrow-forward", :icon=>"arrow-forward", :title=>"arrow-forward", :role=>"button", :tabindex=>"0", :"aria-label"=>"arrow-forward", :"on-click"=>"{{forward}}"}

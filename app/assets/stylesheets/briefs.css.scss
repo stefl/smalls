@@ -1,3 +1,23 @@
 // Place all the styles related to the Briefs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body /deep/ .brief {
+  max-width: 40em;
+  background-color: white;
+  margin: auto;
+  margin-top: 2em;
+  .brief-header {
+    background-color: #fff233;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 2em;
+    margin: auto;
+  }
+  .brief-inner {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    max-width: 36em;
+    margin: auto;
+  }
+}

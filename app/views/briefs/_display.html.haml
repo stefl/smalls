@@ -1,0 +1,36 @@
+
+%polymer-element{name: "brief-display", :attributes=>"brief"}
+  %template
+    .brief
+
+      .brief-header
+        %h1 {{brief.name}}
+      .brief-inner
+        .brief-body
+          %section
+            %h3 Overview
+            %h4 Description
+            %mark-down{:text=>"{{brief.description}}"}
+            %template{:if=>"{{brief.budget_description}}"}
+              %h4 Budget
+              %mark-down{:text=>"{{brief.budget_description}}"}
+
+          %section
+            %h3 Practical details
+
+            %template{:if=>"{{brief.destination}}"}
+              %h4 Where the video will be used
+              %mark-down{:text=>"{{brief.destination}}"}
+
+            %template{:if=>"{{brief.technical_specification}}"}
+              %h4 Technical specification
+              %mark-down{:text=>"{{brief.technical_specification}}"}
+
+
+  :javascript
+    Polymer('brief-display', {
+
+      ready: function() {
+      }
+
+    });

@@ -1,6 +1,11 @@
 
 %h1
+  %img{:src=>asset_path("smalls-logo.svg"), :width => 300}
+%h1
   Brief Builder
 %h2
-  A new way to commission video content
+  The smart way to commission short-form video content
 
+%a{:href=>"/briefs/new", :"data-no-turbolink" => ""}
+  %paper-fab{:class=>"arrow-forward", :icon=>"arrow-forward", :title=>"arrow-forward", :role=>"button", :tabindex=>"0", :"aria-label"=>"arrow-forward"}
+  Commission a video now

@@ -1,0 +1,105 @@
+<!--
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<polymer-element name="scroll-area" attributes="sidebar">
+  <template>
+    <style>
+      h1,h2,h3,h4,h5{font-weight:300;letter-spacing:-0.01em;line-height:48px;margin:0}h1{font-size:40px}polyfill-next-selector{content:':host h1'}::content h1{font-size:40px}h2{font-size:24px}polyfill-next-selector{content:':host h2'}::content h2{font-size:24px}h3{font-size:20px}polyfill-next-selector{content:':host h3'}::content h3{font-size:20px}h4{font-size:16px;font-weight:500}polyfill-next-selector{content:':host h4'}::content h4{font-size:16px;font-weight:500}h5{font-size:12px;font-weight:500}polyfill-next-selector{content:':host h5'}::content h5{font-size:12px;font-weight:500}.start{color:#536dfe}.elements{color:#7986cb}.guide{color:#ff4080}.main-bg{background-color:#eee !important}.main-purple{background-color:#1f2036}.main-purple paper-button{background:#262742 !important;color:white;fill:currentcolor}.main-purple paper-button:hover{background:#3a3b56 !important}code,pre{color:#9f499b;font-family:"Source Code Pro",Monaco,Menlo,Consolas,"Courier New",monospace}pre,.prettyprint{background-color:#fafafa;padding:16px;margin:30px 0}pre .typ,pre .inline,.prettyprint .typ,.prettyprint .inline{color:#6b499f}pre .pun,.prettyprint .pun{color:#5c6bc0}pre .str,pre .string,.prettyprint .str,.prettyprint .string{color:#ff4081}pre .pln,.prettyprint .pln{color:#7986cb}pre .kwd,.prettyprint .kwd{color:#d61a7f}pre .atn,pre .attribute-name,.prettyprint .atn,.prettyprint .attribute-name{color:#6b499f}pre .atv,pre .attribute-value,.prettyprint .atv,.prettyprint .attribute-value{color:#7986cb}pre .com,pre .comment,.prettyprint .com,.prettyprint .comment{color:#8a8a8a}.polymer-status-badge{height:20px;background-color:rgba(0,0,0,0.26);text-transform:uppercase;border-radius:2px;font-size:11px;padding:10px;display:-webkit-box;display:-webkit-flex;display:-moz-flex;display:-ms-flexbox;display:-o-flex;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-moz-justify-content:center;-ms-justify-content:center;-o-justify-content:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-moz-align-items:center;-ms-align-items:center;-o-align-items:center;align-items:center;line-height:1;color:#fff;box-sizing:border-box;margin:0 24px}:host{display:block}:host([sidebar]){padding-left:265px}polyfill-next-selector{content:':host[sidebar]:not(.mobile) site-banner app-bar.fixed'}:host([sidebar]:not(.mobile)) ::content site-banner app-bar.fixed{margin-left:265px}polyfill-next-selector{content:':host.scrolling:not(.mobile) site-banner'}:host(.scrolling:not(.mobile)) ::content site-banner{height:80px !important;padding-bottom:0;position:fixed !important;width:100%;box-shadow:0 1px 5px rgba(0,0,0,0.3)}polyfill-next-selector{content:':host.scrolling:not(.mobile) > article'}:host(.scrolling:not(.mobile)) ::content article{padding-top:310px}polyfill-next-selector{content:':host site-banner app-bar.fixed'}:host ::content site-banner app-bar.fixed{position:fixed}polyfill-next-selector{content:':host > article'}:host ::content article{padding:24px 64px;max-width:912px;min-height:300px;overflow:hidden}@media only screen and (max-width: 850px){:host([sidebar]){padding-left:0 !important}polyfill-next-selector{content:':host > article'}:host ::content article{padding-left:15px;padding-right:15px}}@media only screen and (max-width: 580px){polyfill-next-selector{content:':host > article '}::content article{padding-top:70px}}
+    </style>
+    <core-media-query query="min-width: 581px" queryMatches="{{fancyheader}}"></core-media-query>
+    <content></content>
+  </template>
+  <script>
+(function() {
+  function onScroll_() {
+    this.previousScrollY = this.latestKnownScrollY;
+    /* IE10 only supports pageYOffset */
+    this.latestKnownScrollY = window.scrollY || window.pageYOffset;
+    requestTick_.bind(this)();
+  }
+
+  function requestTick_() {
+    if (!this.ticking) {
+      window.requestAnimationFrame(update_.bind(this));
+    }
+    this.ticking = true;
+  }
+
+  function update_() {
+    this.ticking = false; // Reset the tick so we can capture the next onScroll.
+
+    var currentScrollY = this.latestKnownScrollY;
+    // var previousScrollY = this.previousScrollY;
+
+    this.smallBannerSizeReached = this.siteBannerHeight - currentScrollY < this.appBarHeight;  //80px;
+
+    if (this.smallBannerSizeReached) {
+      this.classList.add('scrolling');
+      this.header && this.header.classList.add('shrink');
+    } else {
+      this.classList.remove('scrolling');
+      this.header && this.header.classList.remove('shrink');
+
+      // Fix and shrink header when it hits the top of the page.
+      if (this.header && this.header.offsetTop - currentScrollY <= 0) {
+        this.header.classList.add('shrink');
+      }
+    }
+  }
+
+  Polymer({
+    latestKnownScrollY: 0,
+    previousScrollY: 0,
+    smallBannerSizeReached: false,
+    ticking: false,
+    fancyheader: true, // header sticks on scroll
+    publish: {
+      sidebar: {value: false, reflect: true}
+    },
+    attached: function() {
+      this.init();
+    },
+    init: function() {
+      var siteBanner = this.querySelector('site-banner');
+      //this.appBar = siteBanner.querySelector('app-bar');
+      this.header = siteBanner.querySelector('header');
+
+      // Give DOM some time to do layout.
+      this.async(function() {
+        this.siteBannerHeight = siteBanner.offsetHeight;
+        //this.appBarHeight = this.appBar.offsetHeight;
+      });
+
+      // For testing.
+      // this.siteBannerHeight = 286;
+      this.appBarHeight = 80;
+
+      // bind() returns new function. Save named reference.
+      this.onscroll = onScroll_.bind(this);
+
+      this.fancyheaderChanged();
+
+      // Handle pageload in middle of page.
+      if ((window.scrollY || window.pageYOffset) && this.fancyheader) {
+        this.onscroll();
+      }
+    },
+    fancyheaderChanged: function() {
+      if (this.fancyheader) {
+        window.addEventListener('scroll', this.onscroll, false);
+      } else {
+        window.removeEventListener('scroll', this.onscroll, false);
+        this.classList.remove('scrolling');
+        this.header && this.header.classList.remove('shrink');
+      }
+    }
+  });
+})();
+</script>
+</polymer-element>

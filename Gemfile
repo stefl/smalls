@@ -45,7 +45,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'polymer-rails'
+gem 'polymer-rails', :github => "alchapone/polymer-rails"
 gem 'polymer-core-rails'
 gem 'polymer-paper-rails'
 gem 'friendly_id'

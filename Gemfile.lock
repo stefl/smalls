@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/alchapone/polymer-rails.git
+  revision: cf7ff059ba8992fdd6085cfd9636cda546a801db
+  specs:
+    polymer-rails (0.2.8)
+      nokogiri (~> 1.6)
+      nokogumbo (~> 1.1)
+      rails (>= 3.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -156,10 +165,6 @@ GEM
       polymer-rails (~> 0.2.2)
     polymer-paper-rails (0.2.6)
       polymer-rails (~> 0.2.5)
-    polymer-rails (0.2.8)
-      nokogiri (~> 1.6)
-      nokogumbo (~> 1.1)
-      rails (>= 3.1.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -314,7 +319,7 @@ DEPENDENCIES
   pg
   polymer-core-rails
   polymer-paper-rails
-  polymer-rails
+  polymer-rails!
   puma
   quiet_assets
   rails (= 4.1.6)

@@ -14,7 +14,8 @@
     "test",
     "tests"
   ],
-  "dependencies": [
-    "d-calendar"
-  ]
+  "dependencies": {
+    "app-router": "~2.6.0",
+    "mark-down": "robdodson/mark-down#~0.6.3"
+  }
 }

@@ -49,3 +49,6 @@ gem 'polymer-rails', :github => "alchapone/polymer-rails"
 gem 'polymer-core-rails'
 gem 'polymer-paper-rails'
 gem 'friendly_id'
+gem 'compass'
+gem 'compass-rails'
+gem 'breakpoint'

@@ -10,6 +10,7 @@
         max-width: 36em;
         margin: auto;
       }
+
       .narrow {
         max-width: 36em;
         margin: auto;
@@ -48,16 +49,6 @@
         margin-bottom: 1rem;
       }
 
-      
-      .cards .page{
-        border: 1px solid #ddd;
-        background-color: #fff;
-        max-width: 40em;
-        margin: auto;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-      }
-
       .main-drawer {
         background-color: #ffee55;
         .smalls-branding {
@@ -73,13 +64,6 @@
         
       }
 
-      
-      
-
-      
-  
-    
-
     %core-drawer-panel
       %core-header-panel.main-drawer{drawer:""}
         .smalls-branding
@@ -87,17 +71,18 @@
             %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
         %core-menu{selected:"{{page}}"}
           %core-item{icon:"label-outline", label:"Start"}
-          %core-item{icon:"label-outline", label:"Overview"}
-          %core-item{icon:"label-outline", label:"Creative"}
-          %core-item{icon:"label-outline", label:"Objectives"}
-          %core-item{icon:"label-outline", label:"Timings"}
-          %core-item{icon:"label-outline", label:"Practicalities"}
-          %core-item{icon:"label-outline", label:"Team"}
-          %core-item{icon:"label-outline", label:"Preview"}
+          %core-item{icon:"info-outline", label:"Overview"}
+          %core-item{icon:"gesture", label:"Creative"}
+          %core-item{icon:"redeem", label:"Objectives"}
+          %core-item{icon:"query-builder", label:"Timings"}
+          %core-item{icon:"subject", label:"Practicalities"}
+          %core-item{icon:"face", label:"Team"}
+          %core-item{icon:"book", label:"Preview"}
         = render partial: "briefs/nav"
   
       %core-header-panel.main-panel{main:""}
-        %button{:"core-drawer-toggle"=>"", toggle: "", drawer: ""}
+        %core-toolbar
+          %core-icon-button{icon:"menu", :"core-drawer-toggle"=>""}
         = form_for @brief, :html => {:as => "ajax-form"} do |f|  
 
           %core-animated-pages.cards{:selected=>"{{page}}", :transitions=>"hero-transition cross-fade", :"on-core-animated-pages-transition-end"=>"{{complete}}"}              
@@ -122,7 +107,6 @@
                     Got it? Let's begin…
                 = render partial: "briefs/next"
                 
-
             %section
               %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
                 %h1 An overview of your project
@@ -188,14 +172,14 @@
               .page{:"cross-fade"=>""}
                 %div{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
                   %div{:flex=>""}
-                    %h2{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-                      What is the pitch deadline?
+                    %h4{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                      Pitch deadline
                     %div{:"cross-fade"=>"", :layout=>"", :horizontal=>"", :center=>"", :"center-justified"=>"", :class=>"light-theme" }
                       %d-calendar{:date=>"{{brief.pitch_deadline}}"}
                       %input{:type=>"hidden", :name=>"brief[pitch_deadline]", :value=>"{{brief.pitch_deadline}}"}
                   %div{:flex=>""}
-                    %h2{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-                      And the delivery deadline?
+                    %h4{:center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                      Delivery deadline
                     %div{:"cross-fade"=>"", :layout=>"", :horizontal=>"", :center=>"", :"center-justified"=>"", :class=>"light-theme" }
                       %d-calendar{:date=>"{{brief.delivery_deadline}}"}
                       %input{:type=>"hidden", :name=>"brief[delivery_deadline]", :value=>"{{brief.delivery_deadline}}"}

@@ -1,11 +1,13 @@
+.big-yellow
+  .hero
+    .hero-inner
+      %h1
+        %img{:src=>asset_path("smalls-logo.svg"), :width => 300}
+      %h2
+        Prototype
+      %h3
+        The smart way to commission short-form video content
 
-%h1
-  %img{:src=>asset_path("smalls-logo.svg"), :width => 300}
-%h1
-  Brief Builder
-%h2
-  The smart way to commission short-form video content
-
-%a{:href=>"/briefs/new", :"data-no-turbolink" => ""}
-  %paper-fab{:class=>"arrow-forward", :icon=>"arrow-forward", :title=>"arrow-forward", :role=>"button", :tabindex=>"0", :"aria-label"=>"arrow-forward"}
-  Commission a video now
+      %a.start-button{:href=>"/briefs/new", :"data-no-turbolink" => ""}
+        Commission a video
+        

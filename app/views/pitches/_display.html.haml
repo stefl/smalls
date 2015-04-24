@@ -1,0 +1,90 @@
+
+%polymer-element{name: "pitch-display", :attributes=>"pitch"}
+  
+
+  %template
+    :scss
+      .pitch-body {
+        section {
+          border-bottom: 2px solid #ddd;
+        }
+      }
+      .pitch-image {
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
+    .pitch
+
+      .pitch-header
+        %h1 {{pitch.one_liner}}
+      
+        %template{:if=>"{{pitch.name}}"}
+          %h4
+            %core-icon{icon:"face"}
+            {{pitch.name}}
+        %template{:if=>"{{pitch.company_name}}"}
+          %h4
+            %core-icon{icon:"work"}
+            {{pitch.company_name}}
+      %template{bind:"", :if => "{{pitch.image}}"}
+        .pitch-image
+          %img{:src => "{{pitch.image.url}}", :style=>"width: 100%"}
+          - if false
+            .pitch-image{:style=>"{{pitch.image | backgroundImageStyle}}"}
+      
+      .pitch-inner
+        .pitch-body
+          %section
+            %h3 
+              %core-icon{icon:"info-outline"}
+              Overview
+            %h4 Synopsis
+            %mark-down{:text=>"{{pitch.synopsis}}"}
+            %h4 Approach
+            %mark-down{:text=>"{{pitch.approach}}"}
+
+          %section
+            %h3 
+              %core-icon{icon:"gesture"}
+              Creative
+            %h4 Look and feel
+            %mark-down{:text=>"{{pitch.look_and_feel}}"}
+            
+            %h4 Approach
+            %mark-down{:text=>"{{pitch.approach}}"}
+
+
+          %section
+            %h3 
+              %core-icon{icon:"subject"}
+              Credentials
+            %h4 References
+            %mark-down{:text=>"{{pitch.references}}"}
+            
+            %h4 Previous work
+            %mark-down{:text=>"{{pitch.previous_work}}"}
+
+            %h4 Past clients
+            %mark-down{:text=>"{{pitch.past_clients}}"}
+
+          %section
+            %h3 
+              %core-icon{icon:"subject"}
+              Team
+            
+            %mark-down{:text=>"{{pitch.team}}"}
+
+  :javascript
+    Polymer('pitch-display', {
+
+      ready: function() {
+
+      },
+      dayDisplay: function(date) {
+        return(date.toDateString());
+      },
+      backgroundImageStyle: function(value) {
+        return('background-image: url(' + value.url + '); background-repeat; no-repeat; background-size: cover; width: 100%; height: 16em;');
+      }
+
+    });

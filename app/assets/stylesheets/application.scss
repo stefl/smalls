@@ -10,49 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require main
+ *= require briefs
  *= require_self
  */
-@import 'compass';
-@import 'breakpoint';
 
-body {
-  font-family: "proxima-nova", sans-serif;
-  &.full {
-    margin: 0px;
-    padding: 0px;
-    background-color: #f1f1f1;
-    width: 100%;
-    height: 100%;
-
-  }
-  /deep/ textarea {
-    width: 100%;
-    max-width: 36em;
-  }
-  /deep/ #mainPanel #dropShadow {
-    display :none
-  }
-  /deep/ .cards .page{
-    background-color: #fff;
-    max-width: 40em;
-    margin: auto;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    margin-bottom: 4rem;
-    @include breakpoint(0em 60em) {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
-}
-
-
-
-body /deep/ .smalls-branding {
-  margin: 0.5rem;
-  opacity: 0.333;
-  &:hover {
-    opacity: 1;
-  }
-}

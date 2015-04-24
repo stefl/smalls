@@ -8,14 +8,13 @@
     = csrf_meta_tags
     <script src="//use.typekit.net/jqs3rqw.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
-    - #todo this blocks. Okay for a hack. Not okay for later.
-    <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
-
-    :javascript
-        filepicker.setKey("ACAPPFXPATraMq58qL4A5z");
-
     = html_import_tag "application"
 
-  %body{:unresolved=>true, :class=>@body_styles}
+  %body{:unresolved=>true, :class=>"devise"}
 
-    = yield
+    %main
+      .smalls-branding
+        %a{:href=>"/", :"data-no-turbolink" => "true"}
+          %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
+      = yield
+

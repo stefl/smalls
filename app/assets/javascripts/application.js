@@ -13,6 +13,6 @@
 //= require polymer/webcomponents
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= #require turbolinks
 //= require time-elements/time-elements
 //= require_tree .

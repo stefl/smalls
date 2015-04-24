@@ -1,6 +1,7 @@
 - @body_styles = "full fullbleed layout vertical"
 
 = render partial: "briefs/display"
+= render partial: "pitches/display"
 
 %polymer-element{name: "brief-maker", :flex=>""}
   
@@ -64,6 +65,15 @@
         
       }
 
+      section {
+        margin-top: 30px;
+      }
+
+      .pitch-list-item {
+        margin-top: 20px;
+      }
+
+
     %core-drawer-panel
       %core-header-panel.main-drawer{drawer:""}
         .smalls-branding
@@ -81,7 +91,7 @@
         = render partial: "briefs/nav"
   
       %core-header-panel.main-panel{main:""}
-        %core-toolbar
+        %core-toolbar.only-mobile
           %core-icon-button{icon:"menu", :"core-drawer-toggle"=>""}
         = form_for @brief, :html => {:as => "ajax-form"} do |f|  
 
@@ -89,23 +99,47 @@
 
             %section
               %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-                %h1 Let’s commission a video, shall we?
+                %template{:if=>"{{aasm_state = 'draft'}}"}
+                  %h1 Let’s commission a video, shall we?
+                %template{:if=>"{{aasm_state != 'draft'}}"}
+                  %h1 {{brief.name}}
               %div.page{:"cross-fade"=>""}
                 .intro
                   
-                  %p
-                    %strong
-                      The Smalls
-                    is a network of talented film makers who make award-winning short form video content. Viral, music, vine, advertorial, all kinds of video.
+                  - if @brief.active?
+                    %p
+                      %strong
+                        Your brief is active
+                      and you will receive pitches here up until the deadline.
 
-                  %p
-                    We’ve made this tool to help you find the right person to make yours.
-                  
-                  %p 
-                    Take a moment to think about what you’re trying to achieve with your project.
-                  %p
-                    Got it? Let's begin…
-                = render partial: "briefs/next"
+
+
+                  - elsif @brief.archived?
+
+                    %p
+                      %strong
+                        Your brief is now closed.
+                      Here are all the pitches you received.
+
+                  - else
+                    %p
+                      %strong
+                        The Smalls
+                      is a network of talented film makers who make award-winning short form video content. Viral, music, vine, advertorial, all kinds of video.
+
+                    %p
+                      We’ve made this tool to help you find the right person to make yours.
+                    
+                    %p 
+                      Take a moment to think about what you’re trying to achieve with your project.
+                    %p
+                      Got it? Let's begin…
+                %template{:if=>"{{aasm_state = 'draft'}}"}
+                  = render partial: "briefs/next"
+
+                %template{:repeat => "{{pitch in pitches}}"}
+                  .pitch-list-item
+                    %pitch-display{:pitch => "{{pitch}}"}
                 
             %section
               %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
@@ -125,8 +159,20 @@
                       %textarea{:name=>"brief[brand_name]", :value => "{{brief.brand_name}}"}
 
                   %paper-input-decorator{:label => "How would you describe this project?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %paper-autogrow-textarea
+                    %paper-autogrow-textarea{:rows => 8}
                       %textarea{:name=>"brief[description]", :value => "{{brief.description}}"}
+
+                  
+                  %div{:center=>"", :horizontal=>"", :layout=>""}
+      
+                    %div{:flex=>""} Make this a public brief 
+                    %div{:flex=>""}
+                      %paper-toggle-button{:checked => "{{brief.is_public}}"}
+                  %p
+                    Public briefs are shown on our main site and publicized through other channels. Private briefs are by open to film makers by invitation only.
+
+                  %input{:type=>"hidden", :name=>"brief[is_public]", :value=>"{{brief.is_public}}"}
+                    
 
                   
                 = render partial: "briefs/next" 
@@ -140,7 +186,7 @@
 
                 .narrow
                   %paper-input-decorator{:label => "What is the style and general aesthetic you’re looking for?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %paper-autogrow-textarea
+                    %paper-autogrow-textarea{:rows => 10}
                       %textarea{:name=>"brief[aesthetic]", :value => "{{brief.aesthetic}}"}
                 = render partial: "briefs/next"  
             %section
@@ -153,15 +199,15 @@
     
                 .narrow
                   %paper-input-decorator{:label => "Why are you commissioning this video?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %paper-autogrow-textarea
+                    %paper-autogrow-textarea{:rows => 4}
                       %textarea{:name => "brief[why_commissioning]", :value => "{{brief.why_commissioning}}"}
 
                   %paper-input-decorator{:label => "What is your challenge or business objective?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %paper-autogrow-textarea
+                    %paper-autogrow-textarea{:rows => 4}
                       %textarea{:name=>"brief[objectives]", :value => "{{brief.objectives}}"}
                     
                   %paper-input-decorator{:label => "What will success look like?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %paper-autogrow-textarea
+                    %paper-autogrow-textarea{:rows => 4}
                       %textarea{:name=>"brief[success_criteria]", :value => "{{brief.success_criteria}}"}
 
                 = render partial: "briefs/next"
@@ -199,7 +245,7 @@
                     %input{:is=>"core-input", :name => "brief[destination]", :value=>"{{brief.destination}}"}
 
                   %paper-input-decorator{:label => "Do you have a technical specification?", :floatingLabel => "", :layout => "", :vertical => ""}
-                    %paper-autogrow-textarea
+                    %paper-autogrow-textarea{:rows => 4}
                       %textarea{:name=>"brief[technical_specification", :value=> "{{brief.technical_specification}}"}
                 = render partial: "briefs/next"
 
@@ -234,8 +280,8 @@
                 .intro
                   %p
                     This is how your brief will appear to a film maker, so take a look and see if you need to make any changes.   
-                  %p
-                    %button{:type => "submit"} Publish this brief 
+                  %p.centered
+                    %button.btn{:type => "submit"} Publish this brief 
                 = render partial: "briefs/next" 
 
               %div.preview{:"cross-fade"=>""}
@@ -258,6 +304,7 @@
 
       ready: function() {
         this.brief = #{@brief.to_json};
+        this.pitches = #{@brief.pitches.to_json};
       }
 
     });

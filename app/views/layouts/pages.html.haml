@@ -12,3 +12,9 @@
 
   %body{:unresolved=>true}
     = yield
+    :plain
+      filepicker.setKey("ACAPPFXPATraMq58qL4A5z");
+      filepicker.pickAndStore({mimetype:"image/*"},{},
+        function(InkBlobs){
+          console.log(JSON.stringify(InkBlobs));
+      });

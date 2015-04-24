@@ -5,5 +5,15 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :brief_types
-  resources :briefs
+  resources :briefs do
+    collection do
+      get :fake
+    end
+    resources :pitches do
+      collection do
+        get :fake
+      end
+    end
+  end
+  resources :pitches
 end

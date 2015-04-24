@@ -19,3 +19,8 @@
       });
 
   %brief-show
+
+  .centered
+    = link_to "Respond to this brief", new_brief_pitch_path(@brief), :class => "btn"
+    |
+    = link_to "Edit", edit_brief_path(@brief), :class => "btn"

@@ -1,0 +1,283 @@
+- @body_styles = "full fullbleed layout vertical"
+
+= render partial: "pitches/display"
+= render partial: "briefs/display"
+
+
+%polymer-element{:name => "smalls-autogrow-textarea"}
+  %template
+
+  :javascript
+    Polymer({});
+
+%polymer-element{name: "pitch-maker", :flex=>""}
+  
+  %template
+    :scss
+      .intro {
+        max-width: 36em;
+        margin: auto;
+      }
+
+      .narrow {
+        max-width: 36em;
+        margin: auto;
+      }
+      .main {
+        min-height: 80vh;
+      }
+      .progress {
+        
+      }
+
+      .next {
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+      }
+
+      .next-right {
+        float: right;
+      }
+
+      paper-fab.arrow-forward {
+        background: #259b24;
+        vertical-align: middle;
+        margin-left: 2rem;
+        margin-right: 2rem;
+      }
+
+      paper-fab.arrow-back {
+        background: #777777;
+        vertical-align: middle;
+        margin-left: 2rem;
+        margin-right: 2rem;
+      }
+
+      .progress-bar {
+        margin-bottom: 1rem;
+      }
+
+      .main-drawer {
+        background-color: #ffee55;
+        .smalls-branding {
+          margin: auto;
+          margin-top: 2rem;
+          text-align: center;
+        }
+      }
+
+      .main-panel {
+        padding-top: 2rem;
+        //min-height: 5000px;
+        
+      }
+
+      section {
+        margin-top: 30px;
+      }
+
+    %core-drawer-panel
+      %core-header-panel.main-drawer{drawer:""}
+        .smalls-branding
+          %a{:href=>"/", :"data-no-turbolink" => "true"}
+            %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
+        %core-menu{selected:"{{page}}"}
+          %core-item{icon:"label-outline", label:"Brief"}
+          %core-item{icon:"info-outline", label:"Overview"}
+          %core-item{icon:"gesture", label:"Creative"}
+          %core-item{icon:"subject", label:"Credentials"}
+          %core-item{icon:"face", label:"Team"}
+          %core-item{icon:"book", label:"Preview"}
+        = render partial: "pitches/nav"
+  
+      %core-header-panel.main-panel{main:""}
+        %core-toolbar.only-mobile
+          %core-icon-button{icon:"menu", :"core-drawer-toggle"=>""}
+
+        = form_for @pitch, :html => {:as => "ajax-form"} do |f|  
+          %core-animated-pages.cards{:selected=>"{{page}}", :transitions=>"hero-transition cross-fade", :"on-core-animated-pages-transition-end"=>"{{complete}}"}              
+
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Respond to this brief
+              %div.page{:"cross-fade"=>""}
+                .intro
+                  
+                  %p
+                    So you’re interested in pitching for this project. Great!
+                  %p
+                    Take a moment to think about your approach and when you're ready, use this tool to make your pitch.
+
+                  %p
+                    Your answers are auto-saved, and you can come back to it at any time. You can make edits right up to the deadline.
+
+
+                = render partial: "pitches/next"
+
+
+              %div{:"cross-fade"=>""}
+                %brief-display#brief-show{:bind=>"",:brief => "{{brief}}"}
+                
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 An overview of your pitch
+              .page{:"cross-fade"=>""}
+                .intro
+                  %p
+                    Imagine you are face-to-face with the person commissioning this work. What would you say to capture their interest?
+
+                .narrow
+                  %paper-input-decorator{:label => "What's a one-liner to describe your idea?", :floatingLabel => "", :layout => "", :vertical => "", :labelVisible => true}
+                    %paper-autogrow-textarea{:rows => 4}
+                      %textarea{:name=>"pitch[one_liner]", :value => "{{pitch.one_liner}}"}
+                    
+
+                  %paper-input-decorator{:label => "And a short synopsis", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea{:rows => 10}
+                      %textarea{:name=>"pitch[synopsis]", :value => "{{pitch.synopsis}}"}
+
+                  %paper-input-decorator{:label => "How would you describe your idea and your approach?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea{:rows => 10}
+                      %textarea{:name=>"pitch[approach]", :value => "{{pitch.approach}}"}
+
+                  %p
+                    You might also like to include an image. 640px width minimum.
+                  %template{bind: "", if: "{{pitch.image}}"}
+                    %img{:src=>"{{pitch.image.url}}"}
+                  %input{:type=>"hidden", :name=>"pitch[image]",:value=>"{{pitch.image | asJson}}"}
+                  %p
+                    %paper-button{:raised=>"", :class=>"colored", :"on-tap"=>"{{pickImage}}"} Add an image
+
+                  
+                = render partial: "pitches/next" 
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Creative pitch
+              .page{:"cross-fade"=>""}
+                .intro
+                  %p
+                    Now think about what you’d like to achieve creatively with this project.
+
+                .narrow
+                  %paper-input-decorator{:label => "Describe the aesthetic and style you're proposing", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea{:rows => 10}
+                      %textarea{:name=>"pitch[look_and_feel]", :value => "{{pitch.look_and_feel}}"}
+                = render partial: "pitches/next"  
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Your credentials
+              .page{:"cross-fade"=>""}
+                .intro
+                  %p
+                    Now think about how you can assure the people you're pitching to that you'll do a good job.
+    
+                .narrow
+
+                  %paper-input-decorator{:label => "Who could provide a reference for you? (Include their contact details)", :floatingLabel => "", :layout => "", :vertical => "", :labelVisible => ""}
+                    %paper-autogrow-textarea{:rows => 8}
+                      %textarea{:name => "pitch[references]", :value => "{{pitch.references}}"}
+
+                  %paper-input-decorator{:label => "What previous work is relevant?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea{:rows => 8}
+                      %textarea{:name=>"pitch[previous_work]", :value => "{{pitch.previous_work}}"}
+                    
+                  %paper-input-decorator{:label => "Do you have any relevant past clients?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea{:rows => 8}
+                      %textarea{:name=>"pitch[past_clients]", :value => "{{pitch.past_clients}}"}
+
+                  %paper-input-decorator{:label => "Do you have any links that are relevant? Add one per line", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea{:rows => 4}
+                      %textarea{:name=>"pitch[links]", :value => "{{pitch.links}}"}
+
+                = render partial: "pitches/next"
+            
+
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Finally, a little about you and the team
+              %div.page{:"cross-fade"=>""}
+                .intro
+
+                .narrow
+                  %paper-input-decorator{:label => "What's your name?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"pitch[name]", :value => "{{pitch.name}}"}
+                  
+                  %paper-input-decorator{:label => "And your email?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"pitch[email]", :value => "{{pitch.email}}"}
+                  %paper-input-decorator{:label => "What's the name of your company?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"pitch[company_name]", :value => "{{pitch.company_name}}"}
+
+                  %paper-input-decorator{:label => "Who would be working on this project?", :floatingLabel => "", :layout => "", :vertical => ""}
+                    %paper-autogrow-textarea
+                      %textarea{:name=>"pitch[team]", :value => "{{pitch.team}}"}
+
+            %section
+              %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
+                %h1 Preview your pitch
+              %div.page{:"cross-fade"=>""}
+                .intro
+                  %p
+                    This is how your pitch will appear to the commissioner, so check it over and make sure you're happy.
+                  %p.centered
+                    %button.btn{:type => "submit"} Complete this pitch
+                  %p.centered
+                    (You can still edit up to the deadline) 
+                =# render partial: "pitches/next" 
+
+              %div.preview{:"cross-fade"=>""}
+                %pitch-display{:pitch => "{{pitch}}"}
+
+  :javascript
+    Polymer('pitch-maker', {
+
+      page: 0,
+
+      forward: function(){
+        this.page = this.page +1;
+      },
+
+      back: function(){
+        this.page = this.page -1;
+      },
+
+      numberOfPages: 8,
+
+      ready: function() {
+        this.pitch = #{@pitch.to_json};
+        this.brief = #{@brief.to_json};
+        console.log("ready");
+      },
+
+      asJson: function(value) {
+        return(JSON.stringify(value));
+      },
+
+
+      pickImage: function() {
+        var ctx = this;
+        filepicker.pick(
+          {
+            mimetypes: ['image/*', 'text/plain'],
+            container: 'window'
+          },
+          function(Blob){
+            console.log(JSON.stringify(Blob));
+            ctx.pitch.image = Blob;
+
+          },
+          function(FPError){
+            console.log(FPError.toString());
+          }
+        );
+      }
+
+    });
+
+%pitch-maker
+  
+
+
+  

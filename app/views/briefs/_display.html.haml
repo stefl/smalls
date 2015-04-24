@@ -1,13 +1,19 @@
 
 %polymer-element{name: "brief-display", :attributes=>"brief"}
   
-
   %template
     :scss
       .brief-body {
         section {
           border-bottom: 2px solid #ddd;
         }
+      }
+      .green {
+        background-color: #22aa77;
+      }
+      .next-right {
+        float: right;
+        margin-right: 2em;
       }
     .brief
 
@@ -16,6 +22,9 @@
         %template{:if=>"{{brief.brand_name}}"}
           %h2
             For {{brief.brand_name}}
+        %p
+          %strong
+            {{brief.state}}
         %template{:if=>"{{brief.pitch_deadline}}"}
           %h4
             %core-icon{icon:"event"}
@@ -26,6 +35,9 @@
             %core-icon{icon:"event"}
             Final delivery
             %time{is:"local-time", datetime:"{{brief.delivery_deadline}}"} {{brief.delivery_deadline | dayDisplay}}
+        .next-right
+          %template{:if => "{{}}"}
+          %paper-fab.green{:"hidden?"=>"{{brief.aasm_state == 'draft'}}", :class=>"create", :icon=>"create", :title=>"create", :role=>"button", :tabindex=>"0", :"aria-label"=>"create", :"on-click"=>"{{showBrief}}"}
             
 
       .brief-inner
@@ -34,8 +46,15 @@
             %h3 Overview
             %h4 Description
             %mark-down{:text=>"{{brief.description}}"}
+            %h4 
+              Budget:
+              %template{:if=>"{{brief.budget_low}}"}
+                £{{brief.budget_low}}
+                %template{:if=>"{{brief.budget_high}}"}
+                  to
+                  £{{brief.budget_high}}
+
             %template{:if=>"{{brief.budget_description}}"}
-              %h4 Budget
               %mark-down{:text=>"{{brief.budget_description}}"}
 
           %section
@@ -72,10 +91,13 @@
     Polymer('brief-display', {
 
       ready: function() {
-
+        console.log("brief ready");
       },
       dayDisplay: function(date) {
         return(date.toDateString());
+      },
+      showBrief: function() {
+        document.location.href = '/briefs/' + this.brief.slug + "/pitches/new";
       }
 
     });

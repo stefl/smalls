@@ -1,0 +1,24 @@
+.main
+  .smalls-branding
+    %a{:href=>"/", :"data-no-turbolink" => "true"}
+      %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
+
+  = render partial: "pitches/display"
+
+  %polymer-element{name: "pitch-show"}
+    %template
+      %pitch-display{pitch: "{{pitch}}"}
+
+    :javascript
+      Polymer('pitch-show', {
+
+        ready: function() {
+          this.pitch = #{@pitch.to_json};
+        }
+
+      });
+
+  %pitch-show
+
+  .centered
+    = link_to "Edit this pitch", edit_brief_pitch_path(@pitch.brief, @pitch), :class => "btn"

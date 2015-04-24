@@ -1,0 +1,16 @@
+%main
+  .smalls-branding
+    %a{:href=>"/", :"data-no-turbolink" => "true"}
+      %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
+
+  %h1 Live briefs
+
+  .brief-list
+    - @briefs.each do |brief|
+      .brief-list__item
+        %h2
+          = link_to brief_path(brief) do
+            = brief.name
+            for 
+            = brief.brand_name
+

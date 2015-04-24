@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404185605) do
+ActiveRecord::Schema.define(version: 20150420132656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,30 @@ ActiveRecord::Schema.define(version: 20150404185605) do
     t.text     "destination"
     t.text     "technical_specification"
     t.text     "project_lead"
+    t.text     "aasm_state"
+    t.json     "image"
+    t.boolean  "is_public"
+  end
+
+  create_table "pitches", force: true do |t|
+    t.text     "one_liner"
+    t.text     "synopsis"
+    t.text     "team"
+    t.json     "links"
+    t.json     "images"
+    t.text     "references"
+    t.text     "company_name"
+    t.text     "approach"
+    t.text     "look_and_feel"
+    t.text     "previous_work"
+    t.text     "past_clients"
+    t.json     "videos"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "brief_id"
+    t.text     "name"
+    t.text     "email"
+    t.json     "image"
   end
 
   create_table "users", force: true do |t|

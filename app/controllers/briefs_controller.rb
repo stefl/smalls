@@ -1,7 +1,7 @@
 class BriefsController < ApplicationController
 
   def new
-    @brief = Brief.new(:name => "An untitled brief")
+    @brief = Brief.new :is_public => true
   end
 
   def create
@@ -27,6 +27,17 @@ class BriefsController < ApplicationController
   def edit
     @brief = Brief.friendly.find(params[:id])
     render :new
+  end
+
+  def index
+    @briefs = Brief.all
+  end
+
+  def fake
+    @brief = Brief.new
+    @brief.fake!
+    @brief.save
+    redirect_to brief_path(@brief)
   end
 
   private

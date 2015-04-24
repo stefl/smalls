@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "compass/typography/vertical_rhythm";
+@import "compass/css3/border-radius";
+@import "breakpoint";
+@import "susy";
+
 body /deep/ .brief {
   max-width: 40em;
   background-color: white;
@@ -22,16 +27,41 @@ body /deep/ .brief {
   }
 }
 
+body /deep/ .pitch {
+  max-width: 40em;
+  background-color: white;
+  margin: auto;
+  margin-top: 2em;
+  .pitch-header {
+    background-color: #fff233;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 2em;
+    margin: auto;
+  }
+  .pitch-inner {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    max-width: 36em;
+    margin: auto;
+  }
+}
+
 .big-yellow {
-  background-color: #fff233;
   width: 100%;
   height: 100%;
+  min-height: 60vh;
+  @include trailer(2);
+  border-top: 4px solid #ffee55;
+  background-position: center center;
 }
 .hero {
   margin: auto;
   text-align: center;
-  max-width: 40em;
-  background-color: #fff233;
+  max-width: 50em;
+  @include padding-leader(2);
+  
+
   .hero-inner {
     padding-left: 2em;
     padding-right: 2em;
@@ -39,19 +69,40 @@ body /deep/ .brief {
     padding-bottom: 2em;
   }
   h1 {
-    background-color: white;
-    color: #222;
+    color: white;
     font-weight: bold;
-    padding: 1em;
+  }
+  h2, h3 {
+    color: #7c4343;
+  }
+  .start-buttons {
+    @include leader(6);
   }
   .start-button {
-    background-color: white;
     color: #222;
+    background-color: #ffee55;
+    @include border-radius(4px);
     font-weight: bold;
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     text-decoration: none;
+    margin-left: 1em;
+    margin-right: 1em;
+    text-transform: uppercase;
+    @include adjust-font-size-to(20px);
+    &:hover, &:active {
+      background-color: white;
+    }
   }
+}
+
+.yellow-header {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.brief-list__item {
+  border-bottom: 1px solid #eee;
 }

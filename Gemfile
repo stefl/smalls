@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
-gem 'rails', '4.1.6'
-gem 'sass-rails', '~> 4.0.3'
+gem 'rails', '4.2.1'
+gem 'sass-rails', '~> 5.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
@@ -15,6 +15,8 @@ gem 'pg'
 gem 'puma'
 gem 'simple_form'
 gem 'upmin-admin'
+gem 'ffaker'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
@@ -45,10 +47,12 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+gem 'aasm'
 gem 'polymer-rails', :github => "alchapone/polymer-rails"
 gem 'polymer-core-rails'
 gem 'polymer-paper-rails'
 gem 'friendly_id'
 gem 'compass'
-gem 'compass-rails'
+gem 'compass-rails', '=2.0.4'
+gem 'susy', '=2.2.2'
 gem 'breakpoint'

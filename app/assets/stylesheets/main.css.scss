@@ -1,0 +1,120 @@
+// Global imports
+@import "breakpoint";
+@import "compass/typography/vertical_rhythm";
+@import "compass/css3/hyphenation";
+@import "compass/utilities/general/clearfix";
+
+// Project imports
+@import "config";
+//@import "base";
+@import "functions";
+@import "typomatic";
+@import "susy";
+
+@import "compass/css3";
+@import "compass/utilities";
+@import "compass/css3/transform";
+@import "compass/css3/transition";
+
+$main-background-color: #fafaf6;
+
+$susy: (
+  columns: 12,
+  gutters: .5,
+  gutter-position: inside,
+);
+
+@include establish-baseline;
+
+
+body {
+  font-family: "proxima-nova", sans-serif;
+  margin: 0px;
+  &.full {
+    margin: 0px;
+    padding: 0px;
+    background-color: #f1f1f1;
+    width: 100%;
+    height: 100%;
+
+  }
+  /deep/ textarea {
+    width: 100%;
+    max-width: 36em;
+  }
+  /deep/ #mainPanel #dropShadow {
+    display :none
+  }
+  /deep/ .cards .page{
+    background-color: #fff;
+    max-width: 40em;
+    margin: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 4rem;
+    @include breakpoint(0em 60em) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  /deep/ button.btn {
+    border: 1px solid #eee;
+    background-color: white;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-weight: bold;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 17px;
+    cursor: pointer;
+  }
+  /deep/ .centered {
+    margin: auto;
+    text-align: center;
+  }
+  /deep/ {
+    a {
+      color: #33aadd;
+    }
+    .brief {
+      @include trailer(6);
+    }
+    .pitch {
+      @include trailer(6);
+    }
+    .only-mobile {
+      @include breakpoint(40em) {
+        display: none;
+      }
+      @include breakpoint(0em to 40em) {
+        display: block;
+      }
+    }
+  }
+}
+
+body /deep/ .smalls-branding {
+  margin: 0.5rem;
+  opacity: 0.333;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+main {
+  @include container(60em);
+}
+
+.container {
+}
+
+.live-briefs, .private-briefs {
+  @include breakpoint(40em) {
+    @include columns(8 of 12 last);
+    @include pre(2);
+    @include post(2);
+  }
+}
+
+.private-briefs {
+  @include leader(2);
+}

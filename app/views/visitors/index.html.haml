@@ -1,13 +1,48 @@
-.big-yellow
+.big-yellow{:style=>"background-image:url('https://www.filepicker.io/api/file/93ftmlLRMqNbb7jXYUhg/convert?w=2000&h=1500&fit=max'); background-size: cover;"}
   .hero
     .hero-inner
       %h1
-        %img{:src=>asset_path("smalls-logo.svg"), :width => 300}
-      %h2
-        Prototype
+        %img{:src=>asset_path("smalls-logo-white.svg"), :width => 300}
       %h3
-        The smart way to commission short-form video content
+        Where brands commission filmmakers to make short films
 
-      %a.start-button{:href=>"/briefs/new", :"data-no-turbolink" => ""}
-        Commission a video
-        
+      .start-buttons
+        %a.start-button{:href=>"/briefs/new", :"data-no-turbolink" => ""}
+          Commission a video
+
+        %a.start-button{:href=>"/briefs/new", :"data-no-turbolink" => ""}
+          Browse briefs
+
+%main
+  .container
+    .live-briefs
+      .yellow-header
+        %h2
+          = pluralize(@briefs.count, "Live brief")
+
+      .brief-list
+        - @briefs.each do |brief|
+          .brief-list__item
+            %h4
+              = link_to brief_path(brief) do
+                = brief.name
+                for 
+                = brief.brand_name
+            %p
+              Closes in
+              = distance_of_time_in_words(brief.pitch_deadline, Time.now)
+    
+    .private-briefs
+      .yellow-header
+        %h2
+          = pluralize(@private_briefs.count, "Private brief")
+        %p
+          Private briefs are only available to registered users on an invitation basis.
+      %p
+        For demo purposes:
+      %p
+        %a.start-button{:href=>"/briefs/fake", :"data-no-turbolink" => ""}
+          Create a fake brief
+      %p
+        %a.start-button{:href=>"/briefs/#{Brief.last.friendly_id}/pitches/fake", :"data-no-turbolink" => ""}
+          Create a fake pitch      

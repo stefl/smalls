@@ -31,7 +31,7 @@ class Brief < ActiveRecord::Base
     self.objectives = FFaker::Lorem.paragraphs(rand(5)+1).join("\n\n")
     self.values = FFaker::Lorem.paragraphs(rand(2)+1).join("\n\n")
     self.aesthetic = FFaker::Lorem.paragraphs(rand(4)+1).join("\n\n")
-    self.location = Faker::Address.country
+    self.location = FFaker::Address.country
     self.practicalities = FFaker::Lorem.paragraphs(rand(4)+1).join("\n\n")
     self.budget_low = (rand(250) + 1) * 1000
     self.budget_high = [self.budget_low + (rand(50) * 1000),nil].sample

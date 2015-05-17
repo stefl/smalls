@@ -139,6 +139,7 @@ body /deep/ .pitch {
 }
 body /deep/ {
   .start-button {
+    white-space: nowrap;
     color: #222;
     background-color: $yellow;
     @include border-radius(4px);

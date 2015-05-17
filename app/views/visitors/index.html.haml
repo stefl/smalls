@@ -1,19 +1,21 @@
-.big-yellow{:style=>"background-image:url('https://www.filepicker.io/api/file/93ftmlLRMqNbb7jXYUhg/convert?w=2000&h=1500&fit=max'); background-size: cover;"}
+.big-yellow
   .hero
-    .hero-inner
+    .flex
       %h1
-        %img{:src=>asset_path("smalls-logo-white.svg"), :width => 300}
+        %img.hero-logo{:src=>asset_path("smalls-logo-white.svg"), :width => 300}
+    .flex
       %h3
-        Where brands commission filmmakers to make short films
-
+        Where brands and filmmakers get together to make short films
+    .flex
       .start-buttons
         %a.start-button{:href=>"/briefs/new", :"data-no-turbolink" => ""}
           Commission a video
 
-        %a.start-button{:href=>"/briefs/new", :"data-no-turbolink" => ""}
+        %a.start-button{:href=>"#briefs", :"data-no-turbolink" => ""}
           Browse briefs
+  .big-yellow-bg     
 
-%main
+%main.blue.large-leader#briefs
   .container
     .live-briefs
       .yellow-header
@@ -31,18 +33,42 @@
             %p
               Closes in
               = distance_of_time_in_words(brief.pitch_deadline, Time.now)
-    
+
+%main.yellow
+  .container    
     .private-briefs
       .yellow-header
         %h2
           = pluralize(@private_briefs.count, "Private brief")
+
         %p
           Private briefs are only available to registered users on an invitation basis.
+
+        .brief-list
+          - @private_briefs.each do |brief|
+            .brief-list__item
+              %h4
+                = link_to brief_path(brief) do
+                  = brief.name
+                  for 
+                  = brief.brand_name
+
+              %p
+                Closes in
+                = distance_of_time_in_words(brief.pitch_deadline, Time.now) rescue nil
+%main.dark-blue
+  .container
+    .centered
       %p
         For demo purposes:
       %p
         %a.start-button{:href=>"/briefs/fake", :"data-no-turbolink" => ""}
-          Create a fake brief
-      %p
-        %a.start-button{:href=>"/briefs/#{Brief.last.friendly_id}/pitches/fake", :"data-no-turbolink" => ""}
-          Create a fake pitch      
+          Create a demo brief
+        
+
+:javascript
+  $(function() {
+    $('.big-yellow-bg').on('webkitAnimationEnd', function(e) {
+      $(this).addClass('visible');
+    });
+  });      

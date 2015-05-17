@@ -74,5 +74,9 @@ class Brief < ActiveRecord::Base
       transitions :to => :archived
     end
 
+    event :draft do
+      transitions :to => :draft
+    end
+
   end
 end

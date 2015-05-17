@@ -4,6 +4,16 @@
 @import "compass/css3/hyphenation";
 @import "compass/utilities/general/clearfix";
 
+@font-face {
+    font-family: din;
+    src: url(font-path('din.eot'));
+    src: url(font-path('din.eot') + "?#iefix") format("embedded-opentype"),
+    url(font-path('din.woff')) format("woff"),
+    url(font-path('din.ttf')) format("truetype");
+    font-weight:normal;
+    font-style:normal;
+}
+
 // Project imports
 @import "config";
 //@import "base";
@@ -93,15 +103,42 @@ body {
 }
 
 body /deep/ .smalls-branding {
-  margin: 0.5rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
   opacity: 0.333;
   &:hover {
     opacity: 1;
   }
 }
 
+.main {
+  background-color: lighten(#c6cdcf,5);
+  @include clearfix();
+}
+
 main {
-  @include container(60em);
+
+  &.yellow {
+    background-color: #fff233;
+  }
+
+  &.blue {
+    background-color: lighten(#c6cdcf,10);
+  }
+
+  &.dark-blue {
+    background-color: darken(#c6cdcf,10);
+  }
+
+  &.large-leader {
+    @include padding-leader(3);
+  }
+
+  .container {
+    @include container(60em);
+    @include padding-leader(1);
+    @include padding-trailer(1);
+  }
 }
 
 .container {

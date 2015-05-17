@@ -99,9 +99,9 @@
 
             %section
               %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
-                %template{:if=>"{{aasm_state = 'draft'}}"}
+                %template{:if=>"{{brief.aasm_state == 'draft'}}"}
                   %h1 Let’s commission a video, shall we?
-                %template{:if=>"{{aasm_state != 'draft'}}"}
+                %template{:if=>"{{brief.aasm_state != 'draft'}}"}
                   %h1 {{brief.name}}
               %div.page{:"cross-fade"=>""}
                 .intro
@@ -111,8 +111,6 @@
                       %strong
                         Your brief is active
                       and you will receive pitches here up until the deadline.
-
-
 
                   - elsif @brief.archived?
 
@@ -134,8 +132,8 @@
                       Take a moment to think about what you’re trying to achieve with your project.
                     %p
                       Got it? Let's begin…
-                %template{:if=>"{{aasm_state = 'draft'}}"}
-                  = render partial: "briefs/next"
+                
+                = render partial: "briefs/next"
 
                 %template{:repeat => "{{pitch in pitches}}"}
                   .pitch-list-item
@@ -153,6 +151,19 @@
                   %paper-input-decorator{:label => "What is the name of this project?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea
                       %textarea{:name=>"brief[name]", :value => "{{brief.name}}"}
+
+                  %p
+                    What kind of project is it?
+                  %div
+                    %paper-radio-group
+                      %paper-radio-button{:value => "music", :label => "Music video"}
+                      %paper-radio-button{:value => "ad", :label => "One-off ad"}
+                      %paper-radio-button{:value => "ad-series", :label => "Ad series"}
+                      %paper-radio-button{:value => "vine", :label => "Vine series"}
+                      %paper-radio-button{:value => "short-film", :label => "Short film"}
+                      %paper-radio-button{:value => "corporate", :label => "Corporate video"}
+                      %paper-radio-button{:value => "explainer", :label => "Explainer"}
+                      %paper-radio-button{:value => "other", :label => "Other"}
 
                   %paper-input-decorator{:label => "What is the name of the brand, product or service the video will promote?", :floatingLabel => "", :layout => "", :vertical => ""}
                     %paper-autogrow-textarea

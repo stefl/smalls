@@ -1,0 +1,35 @@
+.main
+  .smalls-branding
+    %a{:href=>"/", :"data-no-turbolink" => "true"}
+      %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
+
+  = render partial: "briefs/display"
+
+  %main
+    .container
+      
+
+      .start-buttons.centered
+        %h1
+          Admin
+        = form_for @brief, :url => transition_brief_path(@brief), :method => "patch" do
+          %input.btn.start-button{:type=>"submit", :name=>"transition", :value=>"Approve"} 
+          %input.btn.start-button{:type=>"submit", :name=>"transition", :value=>"Moderate"} 
+          %input.btn.start-button{:type=>"submit", :name=>"transition", :value=>"Archive"} 
+          %input.btn.start-button{:type=>"submit", :name=>"transition", :value=>"Draft"}
+          %input.btn.start-button{:type=>"submit", :name=>"transition", :value=>"Delete"}
+
+      %polymer-element{name: "brief-admin"}
+        %template
+          
+          %brief-display{brief: "{{brief}}"}
+        :javascript
+          Polymer('brief-admin', {
+
+            ready: function() {
+              this.brief = #{@brief.to_json};
+            }
+
+          });
+
+      %brief-admin

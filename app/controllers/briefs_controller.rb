@@ -14,6 +14,32 @@ class BriefsController < ApplicationController
     end
   end
 
+  def admin
+    @brief = Brief.friendly.find(params[:id])
+  end
+
+  def transition
+    @brief = Brief.friendly.find(params[:id])
+    case params[:transition]
+    when "Approve"
+      @brief.approve
+    when "Draft"
+      @brief.draft
+    when "Archive"
+      @brief.archive
+    when "Moderate"
+      @brief.moderate
+    when "Delete"
+      @brief.destroy
+    end
+    if params[:transition] == "Delete"
+      redirect_to "/"
+    else
+      @brief.save
+      redirect_to brief_path(@brief)
+    end
+  end
+
   def update
     @brief = Brief.friendly.find(params[:id])
     @brief.update_attributes(brief_params)
@@ -37,6 +63,8 @@ class BriefsController < ApplicationController
     @brief = Brief.new
     @brief.fake!
     @brief.save
+    @brief.submit
+    @brief.save
     redirect_to brief_path(@brief)
   end
 
@@ -44,4 +72,5 @@ class BriefsController < ApplicationController
     def brief_params
       params.require(:brief).permit! #todo
     end
+
 end

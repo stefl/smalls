@@ -20,7 +20,20 @@
 
   %brief-show
 
-  .centered
-    = link_to "Respond to this brief", new_brief_pitch_path(@brief), :class => "btn"
-    |
-    = link_to "Edit", edit_brief_path(@brief), :class => "btn"
+
+%main.blue
+  .container
+    .centered
+      
+      %p
+        = link_to "Respond to this brief", new_brief_pitch_path(@brief), :class => "btn start-button"
+        = link_to "Edit", edit_brief_path(@brief), :class => "btn start-button"
+        = link_to "Admin", admin_brief_path(@brief), :class => "btn start-button"
+
+%main.dark-blue
+  .container
+    .centered
+      %p
+        %a.start-button{:href=>"/briefs/#{@brief.friendly_id}/pitches/fake", :"data-no-turbolink" => ""}
+          Create a demo pitch in response
+

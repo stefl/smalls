@@ -1,3 +1,5 @@
+
+
 // A type scaling utility $type-scale map with the predefined values
 
  // Each loop that outputs all of the type scales as placeholders with their type-prefix
@@ -57,39 +59,41 @@
 }
 
 // Headings
-#{h1, h2, h3, h4, h5} {
-    font-family: $base-font-family;
-    margin-top: 0;
-    @include type-weight(regular);
-    @include margin-trailer(1);
-    @include type-ligatures;
-}
-h1 {
-    @include type-scale(xxlarge);
-}
-h2 {
-    @include type-scale(xlarge);
-}
-h3 {
-    @include type-scale(large);
-    &.h3-thin {
-       @include type-weight(thin); 
+body /deep/ {
+    #{h1, h2, h3, h4, h5} {
+        font-family: $base-font-family;
+        margin-top: 0;
+        @include type-weight(regular);
+        @include margin-trailer(1);
+        @include type-ligatures;
     }
-}
-h4 {
-    @include type-scale(medium);
-}
-h5 {
-    @include type-scale(base);
-}
+    h1 {
+        @include type-scale(xxlarge);
+    }
+    h2 {
+        @include type-scale(xlarge);
+    }
+    h3 {
+        @include type-scale(large);
+        &.h3-thin {
+           @include type-weight(thin); 
+        }
+    }
+    h4 {
+        @include type-scale(medium);
+    }
+    h5 {
+        @include type-scale(base);
+    }
 
-// Paragraphs
-p {
-    @include margin-trailer(1);
-    @include word-break(break-word);
-    @include hyphens(auto);
-    @include type-ligatures;
-    //font-family: $alt-font-family;
+    // Paragraphs
+    p {
+        @include margin-trailer(1);
+        @include word-break(break-word);
+        @include hyphens(auto);
+        @include type-ligatures;
+        //font-family: $alt-font-family;
+    }
 }
 
 // Small

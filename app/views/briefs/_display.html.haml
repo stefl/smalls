@@ -4,6 +4,8 @@
   %template
     :scss
       .brief-body {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
         section {
           border-bottom: 2px solid #ddd;
         }
@@ -15,6 +17,16 @@
         float: right;
         margin-right: 2em;
       }
+      .brief-state {
+        background-color: white;
+        text-transform: uppercase;
+        display: inline-block;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        font-weight: 100;
+        border-radius: 4px;
+      }
+
     .brief
 
       .brief-header
@@ -22,9 +34,9 @@
         %template{:if=>"{{brief.brand_name}}"}
           %h2
             For {{brief.brand_name}}
-        %p
-          %strong
-            {{brief.state}}
+        %template{:if=>"{{brief.aasm_state != 'active'}}"}
+          %p.brief-state
+            {{brief.aasm_state}}
         %template{:if=>"{{brief.pitch_deadline}}"}
           %h4
             %core-icon{icon:"event"}
@@ -37,7 +49,13 @@
             %time{is:"local-time", datetime:"{{brief.delivery_deadline}}"} {{brief.delivery_deadline | dayDisplay}}
         .next-right
           %template{:if => "{{}}"}
-          %paper-fab.green{:"hidden?"=>"{{brief.aasm_state == 'draft'}}", :class=>"create", :icon=>"create", :title=>"create", :role=>"button", :tabindex=>"0", :"aria-label"=>"create", :"on-click"=>"{{showBrief}}"}
+          %core-tooltip{:tabindex=>"0"}
+            
+            .rich
+              %paper-fab.green{:"hidden?"=>"{{brief.aasm_state == 'draft'}}", :class=>"create", :icon=>"arrow-forward", :title=>"Respond to this brief", :role=>"button", :tabindex=>"0", :"aria-label"=>"Respond to this brief", :"on-click"=>"{{showBrief}}"}
+            %div{:tip=>""}
+              Respond to this brief
+            
             
 
       .brief-inner

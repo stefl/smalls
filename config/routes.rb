@@ -9,9 +9,19 @@ Rails.application.routes.draw do
     collection do
       get :fake
     end
+
+    member do
+      get :admin
+      patch :transition
+    end
+
     resources :pitches do
       collection do
         get :fake
+      end
+
+      member do
+        get :admin
       end
     end
   end

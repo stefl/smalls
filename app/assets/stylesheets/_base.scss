@@ -29,6 +29,7 @@ main {
         float: right;
         width: 35%;
     }
+    
 }
 footer {
     @include apply-side-rhythm-border(top, 2px, 1);

@@ -19,6 +19,11 @@
       });
 
   %pitch-show
-
-  .centered
-    = link_to "Edit this pitch", edit_brief_pitch_path(@pitch.brief, @pitch), :class => "btn"
+%main.blue
+  .container
+    .centered
+      = link_to "Edit your pitch", edit_brief_pitch_path(@pitch.brief, @pitch), :class => "btn start-button"
+%main.dark-blue
+  .container
+    .centered
+      = link_to "Admin", admin_brief_pitch_path(@pitch.brief, @pitch), :class => "btn start-button"

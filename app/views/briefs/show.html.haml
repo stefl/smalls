@@ -21,9 +21,17 @@
   %brief-show
 
 
-%main.blue
+
+%main.blue.large-leader
   .container
     .centered
+      - if @brief.pitches.count > 0
+        %h1
+          = pluralize(@brief.pitches.count, 'pitch')
+          in response
+      - @brief.pitches.each do |pitch|
+        %h2
+          = link_to pitch.one_liner, brief_pitch_path(@brief,pitch)
       
       %p
         = link_to "Respond to this brief", new_brief_pitch_path(@brief), :class => "btn start-button"

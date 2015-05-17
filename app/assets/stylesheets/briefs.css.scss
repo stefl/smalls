@@ -137,30 +137,32 @@ body /deep/ .pitch {
 .start-buttons {
   @include leader(3);
 }
-.start-button {
-  color: #222;
-  background-color: $yellow;
-  @include border-radius(4px);
-  font-weight: 100;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  text-decoration: none;
-  margin-left: 1em;
-  margin-right: 1em;
-  text-transform: uppercase;
-  @include adjust-font-size-to(20px, 3);
-  &:hover, &:active {
-    background-color: white;
+body /deep/ {
+  .start-button {
+    color: #222;
+    background-color: $yellow;
+    @include border-radius(4px);
+    font-weight: 100;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    text-decoration: none;
+    margin-left: 1em;
+    margin-right: 1em;
+    text-transform: uppercase;
+    @include adjust-font-size-to(20px, 3);
+    &:hover, &:active {
+      background-color: white;
+    }
+    @include clearfix();
   }
-  @include clearfix();
-}
 
-input.start-button {
-  border: 0px;
-  display: inline-block;
-  @include adjust-font-size-to(17px, 1);
+  input.start-button {
+    border: 0px;
+    display: inline-block;
+    @include adjust-font-size-to(17px, 1);
+  }
 }
 
 .yellow-header {

@@ -22,7 +22,10 @@
 %main.blue
   .container
     .centered
-      = link_to "Edit your pitch", edit_brief_pitch_path(@pitch.brief, @pitch), :class => "btn start-button"
+      %p
+        = link_to "Back to brief", brief_path(@pitch.brief), :class => "btn start-button"
+
+        = link_to "Edit your pitch", edit_brief_pitch_path(@pitch.brief, @pitch), :class => "btn start-button"
 %main.dark-blue
   .container
     .centered

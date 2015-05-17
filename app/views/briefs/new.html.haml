@@ -135,9 +135,10 @@
                 
                 = render partial: "briefs/next"
 
-                %template{:repeat => "{{pitch in pitches}}"}
-                  .pitch-list-item
-                    %pitch-display{:pitch => "{{pitch}}"}
+                - if false
+                  %template{:repeat => "{{pitch in pitches}}"}
+                    .pitch-list-item
+                      %pitch-display{:pitch => "{{pitch}}"}
                 
             %section
               %div{:hero=>"", :center=>"", :layout=>"", :horizontal=>"", :"center-justified"=>""}
@@ -292,7 +293,7 @@
                   %p
                     This is how your brief will appear to a film maker, so take a look and see if you need to make any changes.   
                   %p.centered
-                    %button.btn{:type => "submit"} Publish this brief 
+                    %button.btn.start-button{:type => "submit"} Publish this brief 
                 = render partial: "briefs/next" 
 
               %div.preview{:"cross-fade"=>""}

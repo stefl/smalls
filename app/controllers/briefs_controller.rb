@@ -65,7 +65,7 @@ class BriefsController < ApplicationController
     @brief.save
     @brief.submit
     @brief.save
-    redirect_to brief_path(@brief)
+    redirect_to edit_brief_path(@brief)
   end
 
   private

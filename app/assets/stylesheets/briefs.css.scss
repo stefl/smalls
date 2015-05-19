@@ -71,8 +71,12 @@ body /deep/ .pitch {
 
 .big-yellow-bg {
   z-index: -1;
-  background: url('https://www.filepicker.io/api/file/93ftmlLRMqNbb7jXYUhg/convert?w=2000&h=1500&fit=max') no-repeat center center fixed;
+  background: url('https://www.filepicker.io/api/file/93ftmlLRMqNbb7jXYUhg/convert?w=2000&h=1500&fit=max') no-repeat center center;
   
+  @include breakpoint(45em) {
+    background-attachment: fixed;
+  }
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -137,7 +141,7 @@ body /deep/ .pitch {
 .start-buttons {
   @include leader(3);
 }
-body /deep/ {
+body, body /deep/ {
   .start-button {
     white-space: nowrap;
     color: #222;

@@ -36,6 +36,10 @@ $susy: (
 
 @include establish-baseline;
 
+.centered {
+  margin: auto;
+  text-align: center;
+}
 
 body {
   font-family: "proxima-nova", sans-serif;

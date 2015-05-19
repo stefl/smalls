@@ -5,7 +5,7 @@
     %meta{:content => "width=device-width, initial-scale=1.0, minimum-scale=1.0", :name => "viewport"}/
     %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title The Smalls
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true, :"shim-shadowdom" => ""
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     <script src="//use.typekit.net/jqs3rqw.js"></script>

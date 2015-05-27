@@ -253,3 +253,14 @@ body /deep/ .floated-label .label-text {
 body /deep/ .focused-underline {
   background-color: #222;
 }
+
+body /deep/ button.btn {
+  padding: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  text-transform: uppercase;
+  font-family: "din";
+  border: 1px solid #222;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}

@@ -65,6 +65,7 @@ body {
     margin: auto;
     padding-top: 2rem;
     padding-bottom: 2rem;
+    margin-top: 2rem;
     margin-bottom: 4rem;
     @include breakpoint(0em 60em) {
       padding-left: 1rem;

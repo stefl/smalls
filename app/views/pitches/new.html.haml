@@ -58,7 +58,7 @@
       }
 
       .main-drawer {
-        background-color: #ffee55;
+        background-color: #ffff00;
         .smalls-branding {
           margin: auto;
           margin-top: 2rem;
@@ -76,18 +76,34 @@
         margin-top: 30px;
       }
 
+      section h1 {
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-top: 1em;
+        text-align: center;
+      }
+
+      .back-forward paper-fab {
+        background-color: #222;
+      }
+
+      core-menu core-item {
+        text-transform: uppercase;
+        padding-left: 1em;
+      }
+
     %core-drawer-panel
       %core-header-panel.main-drawer{drawer:""}
         .smalls-branding
           %a{:href=>"/", :"data-no-turbolink" => "true"}
             %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
         %core-menu{selected:"{{page}}"}
-          %core-item{icon:"label-outline", label:"Brief"}
-          %core-item{icon:"info-outline", label:"Overview"}
-          %core-item{icon:"gesture", label:"Creative"}
-          %core-item{icon:"subject", label:"Credentials"}
-          %core-item{icon:"face", label:"Team"}
-          %core-item{icon:"book", label:"Preview"}
+          %core-item{label:"Brief"}
+          %core-item{label:"Overview"}
+          %core-item{label:"Creative"}
+          %core-item{label:"Credentials"}
+          %core-item{label:"Team"}
+          %core-item{label:"Preview"}
         = render partial: "pitches/nav"
   
       %core-header-panel.main-panel{main:""}

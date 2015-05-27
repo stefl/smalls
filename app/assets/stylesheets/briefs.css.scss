@@ -8,7 +8,7 @@
 @import "breakpoint";
 @import "susy";
 
-$yellow: #ffee55;
+$yellow: #ffff00;
 
 body /deep/ .brief {
   max-width: 40em;
@@ -17,7 +17,7 @@ body /deep/ .brief {
   margin-top: 2em;
   @include trailer(4);
   .brief-header {
-    background-color: #fff233;
+    background-color: #ffff00;
     padding-top: 2em;
     padding-bottom: 2em;
     padding-left: 2em;
@@ -40,7 +40,7 @@ body /deep/ .pitch {
   @include clearfix();
   @include trailer(4);
   .pitch-header {
-    background-color: #fff233;
+    background-color: #ffff00;
     padding-top: 2em;
     padding-bottom: 2em;
     padding-left: 2em;
@@ -202,4 +202,53 @@ body, body /deep/ {
   p {
     @include trailer(0);
   }
+}
+
+body /deep/ paper-fab.next {
+  background-color: #222;
+}
+
+body /deep/ paper-fab.green, body /deep/ paper-fab.arrow-forward {
+  background-color: #222;
+}
+
+body /deep/ .day:after {
+  background-color: #ffff00;
+}
+
+body /deep/ .day[selected] div {
+  color: #222;
+}
+
+body /deep/ #selectedWeekdayHeader {
+  background-color: #ffff00;
+  color: #222;
+}
+
+body /deep/ * {
+  font-family: "Din", "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body /deep/ #activeProgress {
+  background-color: #222;
+}
+
+body /deep/ #progressContainer {
+  background-color: #fff;
+}
+
+body /deep/ paper-radio-button[checked] #offRadio {
+  border-color: #222;
+}
+
+body /deep/ paper-radio-button #onRadio {
+  background-color: #222;
+}
+
+body /deep/ .floated-label .label-text {
+  color: #222 !important;
+}
+
+body /deep/ .focused-underline {
+  background-color: #222;
 }

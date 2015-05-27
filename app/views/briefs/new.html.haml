@@ -51,7 +51,7 @@
       }
 
       .main-drawer {
-        background-color: #ffee55;
+        background-color: #ffff00;
         .smalls-branding {
           margin: auto;
           margin-top: 2rem;
@@ -73,6 +73,21 @@
         margin-top: 20px;
       }
 
+      section h1 {
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-top: 1em;
+        text-align: center;
+      }
+
+      .back-forward paper-fab {
+        background-color: #222;
+      }
+
+      core-menu core-item {
+        text-transform: uppercase;
+        padding-left: 1em;
+      }
 
     %core-drawer-panel
       %core-header-panel.main-drawer{drawer:""}
@@ -80,14 +95,14 @@
           %a{:href=>"/", :"data-no-turbolink" => "true"}
             %img{:src=>asset_path("smalls-logo.svg"), :width => 100}
         %core-menu{selected:"{{page}}"}
-          %core-item{icon:"label-outline", label:"Start"}
-          %core-item{icon:"info-outline", label:"Overview"}
-          %core-item{icon:"gesture", label:"Creative"}
-          %core-item{icon:"redeem", label:"Objectives"}
-          %core-item{icon:"query-builder", label:"Timings"}
-          %core-item{icon:"subject", label:"Practicalities"}
-          %core-item{icon:"face", label:"Team"}
-          %core-item{icon:"book", label:"Preview"}
+          %core-item{label:"Start"}
+          %core-item{label:"Overview"}
+          %core-item{label:"Creative"}
+          %core-item{label:"Objectives"}
+          %core-item{label:"Timings"}
+          %core-item{label:"Practicalities"}
+          %core-item{label:"Team"}
+          %core-item{label:"Preview"}
         = render partial: "briefs/nav"
   
       %core-header-panel.main-panel{main:""}
@@ -315,8 +330,11 @@
       numberOfPages: 8,
 
       ready: function() {
-        this.brief = #{@brief.to_json};
-        this.pitches = #{@brief.pitches.to_json};
+        var ctx = this;
+        setTimeout(function() {
+          ctx.brief = #{@brief.to_json};
+          ctx.pitches = #{@brief.pitches.to_json};
+        });
       }
 
     });

@@ -59,22 +59,31 @@
 }
 
 // Headings
+
+body {
+    font-family: $base-font-family;
+}
 body /deep/ {
+    font-family: $base-font-family;
     #{h1, h2, h3, h4, h5} {
         font-family: $base-font-family;
         margin-top: 0;
         @include type-weight(regular);
         @include margin-trailer(1);
         @include type-ligatures;
+        text-transform: uppercase;
     }
     h1 {
         @include type-scale(xxlarge);
+        letter-spacing: 0.5px;
     }
     h2 {
         @include type-scale(xlarge);
+        letter-spacing: 0.4px;
     }
     h3 {
         @include type-scale(large);
+        letter-spacing: 0.3px;
         &.h3-thin {
            @include type-weight(thin); 
         }
@@ -111,7 +120,7 @@ small {
 
 @include breakpoint(0em 30em) {
     h1 {
-        @include type-scale-mobile(xxlarge);
+        @include type-scale-mobile(xlarge);
     }
     h2 {
         @include type-scale-mobile(xlarge);

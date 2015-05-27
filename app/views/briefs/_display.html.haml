@@ -40,9 +40,9 @@
     .brief
 
       .brief-header
-        %h1 {{brief.name}}
+        %h2 {{brief.name}}
         %template{:if=>"{{brief.brand_name}}"}
-          %h2
+          %h4
             For {{brief.brand_name}}
         %template{:if=>"{{brief.aasm_state != 'active'}}"}
           %p.brief-state

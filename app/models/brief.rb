@@ -36,7 +36,7 @@ class Brief < ActiveRecord::Base
     self.budget_low = (rand(250) + 1) * 1000
     self.budget_high = [self.budget_low + (rand(50) * 1000),nil].sample
     self.brand_name = [FFaker::Product.brand,FFaker::Company.name].sample
-    self.budget_description = ["Budget not negotiable", "Budget negotiable", nil, "Including taxes"].sample
+    self.budget_description = [nil].sample
     self.company_name = [self.brand_name,FFaker::Company.name].sample
     self.email = "#{self.project_lead.parameterize.gsub("-",".")}@#{self.company_name.parameterize + ".com"}"
     self.telephone = FFaker::PhoneNumber.phone_number

@@ -110,7 +110,7 @@
         %core-toolbar.only-mobile
           %core-icon-button{icon:"menu", :"core-drawer-toggle"=>""}
 
-        = form_for @pitch, :html => {:as => "ajax-form"} do |f|  
+        = form_for @pitch, :url => brief_pitches_path(@pitch.brief), :html => {:as => "ajax-form"} do |f|  
           %core-animated-pages.cards{:selected=>"{{page}}", :transitions=>"hero-transition cross-fade", :"on-core-animated-pages-transition-end"=>"{{complete}}"}              
 
             %section

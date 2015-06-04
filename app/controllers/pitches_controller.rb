@@ -17,14 +17,24 @@ class PitchesController < ApplicationController
 
   def create
     @brief = Brief.friendly.find(params[:brief_id])
-    @pitch = Pitch.new(brief_params)
-    @pitch.brief = @brief
-    if @brief.save
+    @pitch = Pitch.new(pitch_params)
+    logger.info pitch_params
+    @pitch.brief_id = @brief.id
+    logger.info @pitch.inspect
+    logger.info @pitch.valid?
+    if @pitch.save
+      logger.info @pitch.id
       redirect_to brief_pitch_path(@brief, @pitch)
     else
       flash[:errors] = "Sorry, your pitch couldn't be saved"
       render :new
     end
+  end
+
+  def index
+    @brief = Brief.friendly.find(params[:brief_id])
+
+    redirect_to brief_path(@brief)
   end
 
   def update

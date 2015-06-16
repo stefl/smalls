@@ -178,3 +178,13 @@ main {
 h1.trailer {
   @include trailer(2);
 }
+
+// Safari bug
+body /deep/ core-icon {
+  height: 100%;
+}
+
+// Safari bug
+body /deep/ paper-fab core-icon svg {
+  fill: white;
+}

@@ -170,3 +170,11 @@ main {
 .private-briefs {
   @include leader(2);
 }
+
+.trailer {
+  @include trailer(1);
+}
+
+h1.trailer {
+  @include trailer(2);
+}

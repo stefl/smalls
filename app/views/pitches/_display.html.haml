@@ -20,11 +20,9 @@
       
         %template{:if=>"{{pitch.name}}"}
           %h4
-            %core-icon{icon:"face"}
             {{pitch.name}}
         %template{:if=>"{{pitch.company_name}}"}
           %h4
-            %core-icon{icon:"work"}
             {{pitch.company_name}}
       %template{bind:"", :if => "{{pitch.image}}"}
         .pitch-image
@@ -36,7 +34,6 @@
         .pitch-body
           %section
             %h3 
-              %core-icon{icon:"info-outline"}
               Overview
             %h4 Synopsis
             %mark-down{:text=>"{{pitch.synopsis}}"}
@@ -45,7 +42,6 @@
 
           %section
             %h3 
-              %core-icon{icon:"gesture"}
               Creative
             %h4 Look and feel
             %mark-down{:text=>"{{pitch.look_and_feel}}"}
@@ -56,7 +52,6 @@
 
           %section
             %h3 
-              %core-icon{icon:"subject"}
               Credentials
             %h4 References
             %mark-down{:text=>"{{pitch.references}}"}
@@ -69,7 +64,6 @@
 
           %section
             %h3 
-              %core-icon{icon:"subject"}
               Team
             
             %mark-down{:text=>"{{pitch.team}}"}
@@ -82,7 +76,7 @@
       },
       dayDisplay: function(date) {
         if(date) {
-          if(date.todDateString) {
+          if(date.toDateString) {
             return(date.toDateString());
           }
         }

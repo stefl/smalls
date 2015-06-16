@@ -81,7 +81,11 @@
 
       },
       dayDisplay: function(date) {
-        return(date.toDateString());
+        if(date) {
+          if(date.todDateString) {
+            return(date.toDateString());
+          }
+        }
       },
       backgroundImageStyle: function(value) {
         return('background-image: url(' + value.url + '); background-repeat; no-repeat; background-size: cover; width: 100%; height: 16em;');

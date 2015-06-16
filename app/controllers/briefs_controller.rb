@@ -18,6 +18,10 @@ class BriefsController < ApplicationController
     @brief = Brief.friendly.find(params[:id])
   end
 
+  def review
+    @briefs = Brief.where(:aasm_state => "for_review").order("created_at desc")
+  end
+
   def transition
     @brief = Brief.friendly.find(params[:id])
     case params[:transition]

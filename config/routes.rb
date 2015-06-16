@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :briefs do
     collection do
       get :fake
+      get :review
     end
 
     member do
